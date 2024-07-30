@@ -1,0 +1,97 @@
+body{
+    background-color: black;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    padding: 20px 60px;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+header ul{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+div{
+    color: #ffffff;
+    font-family: 'San-Francisco', sans-serif;
+}
+.container{
+    max-width: 1440px;
+}
+.main{
+    background-image: url(../images/sakura.png);
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-size: 40%;
+    background-position-x: 80%;
+    background-position-y: 50%;
+}
+.menu-item{
+    color: #ffffff;
+    font-family: 'San-Francisco', sans-serif;
+    margin-right: 39px;
+    font-size: 18px;
+
+}
+.menu-item:hover{
+    color:#aeaeae;
+    text-decoration: none;
+}
+.main-block{
+    width: 425px;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 14px;
+    padding: 20px;
+    backdrop-filter: blur(3px);
+    margin: 0;
+}
+.logo{
+    color: #ffffff;
+    font-family: 'San-Francisco', sans-serif;
+    font-size: 25px;
+}
+.logo:hover{
+    color:#aeaeae;
+    text-decoration: none;
+}
+.title{
+    font-family: 'San-Francisco', sans-serif;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 500;
+}
+.title::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 1px;
+    animation: blinking 1s infinite;
+  }
+  
+  @keyframes blinking {
+    0% {
+      opacity: 0;
+    }
+    25% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
