@@ -11,7 +11,7 @@ header{
     height: 50px;
     padding: 12px 60px;
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(22px);
     z-index: 99999999999999;
 }
 header ul{
