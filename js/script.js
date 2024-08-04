@@ -4,7 +4,7 @@ class Writer {
       
       if (!this.node) return;
   
-      this.timer = 55; // .2s
+      this.timer = 35; // .2s
       this.broken = this.node.textContent.split('');
   
       this._init();
