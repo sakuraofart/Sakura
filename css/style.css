@@ -28,16 +28,10 @@ div{
     max-width: 1440px;
 }
 .main{
-    background-image: url(../images/sakuraGIF.gif);
     height: 100vh;
-    background-repeat: no-repeat;
-    background-position: center;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    background-size: 40%;
-    background-position-x: 80%;
-    background-position-y: 50%;
 }
 .menu-item{
     color: #ffffff;
@@ -102,3 +96,41 @@ div{
   ::-webkit-scrollbar {
     display: none;
   }
+#backgroundVideo {
+    position: fixed;
+    top: 0;
+    right: 4%;
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+        }
+
+.contact{
+  display: flex;
+  flex-direction: row;
+}
+.contact__title{
+    font-size: 74px;
+}
+.contact__subtitle{
+  font-size: 28px;
+  width: 50%;
+}
+.contact__mail{
+  display: flex;
+  flex-direction: row;
+}
+.contact__mail div{
+  margin: 20px 45px 0 0;
+}
+.contact__mail div h3{
+  font-size: 22px;
+  color: #aeaeae;
+  font-weight: 300;
+}
+.contact__mail div a{
+  font-size: 28px;
+  color: #ffffff;
+  font-weight: 300;
+}
