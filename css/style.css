@@ -1,3 +1,7 @@
+* {
+  font-family: 'San-Francisco';
+  src: url("../fonts/san_francisco-webfont.woff2");
+}
 body{
     background-color: black;
     height: 2000px;
@@ -22,7 +26,6 @@ header ul{
 
 div{
     color: #ffffff;
-    font-family: 'San-Francisco', sans-serif;
 }
 .container{
     max-width: 1440px;
@@ -35,7 +38,6 @@ div{
 }
 .menu-item{
     color: #ffffff;
-    font-family: 'San-Francisco', sans-serif;
     margin-right: 39px;
     font-size: 18px;
 
@@ -45,17 +47,16 @@ div{
     text-decoration: none;
 }
 .main-block{
-    width: 425px;
+    max-width: 425px;
     margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 14px;
+    border-radius: 35px;
     padding: 20px;
     backdrop-filter: blur(20px);
     margin: 0;
 }
 .logo{
     color: #ffffff;
-    font-family: 'San-Francisco', sans-serif;
     font-size: 25px;
 }
 .logo:hover{
@@ -63,7 +64,6 @@ div{
     text-decoration: none;
 }
 .title{
-    font-family: 'San-Francisco', sans-serif;
     text-align: center;
     font-size: 48px;
     font-weight: 500;
@@ -99,10 +99,10 @@ div{
 #backgroundVideo {
     position: fixed;
     top: 0;
-    right: 4%;
-    width: 50%;
+    right: -4%;
+    /* width: 50%; */
     height: 100%;
-    object-fit: cover;
+    object-fit: fit;
     z-index: -1;
         }
 
@@ -134,3 +134,191 @@ div{
   color: #ffffff;
   font-weight: 300;
 }
+
+/* ---------------------------------START: portfolio block------------------------------------------ */
+.portfolio {
+  margin-top: 200px;
+}
+
+.title.portfolio_title {
+  font-size: 38px;
+}
+
+.portfolio_title {
+  width: 100%;
+  text-align: center;
+}
+hr {
+  opacity: 0.3;
+  max-width: 400px;
+}
+
+.portfolio__block {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Позволяет блокам переноситься на следующую строку */
+  gap: 45px; /* Отступы между блоками */
+  max-width: 1200px;
+}
+
+.portfolio__item {
+  background-color: #ffffff7c;
+  backdrop-filter: blur(30px);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  flex: 1 1 40%; /* Блоки будут занимать по 30% ширины и переноситься на новую строку при необходимости */
+  max-width: 450px;
+  height: 300px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 35px;
+  display: flex;
+  justify-content: center; /* Выравнивание по горизонтали */
+    align-items: center; /* Выравнивание по вертикали */
+    overflow: hidden;
+}
+
+.portfolio__item:after{
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 100%;
+  height: 0;
+  background-color: #ffffff;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border-radius: 35px;
+  opacity: 0;
+}
+
+/* .portfolio__item.item_1::after {
+  background-image: url("../images/pulltailVIDEO.mp4");
+  background-size: cover;
+}
+
+.portfolio__item.item_2::after {
+  background-image: url("../images/BundleBornAnim.gif");
+  background-size: cover;
+}
+
+.portfolio__item.item_3::after {
+  background-image: url("../images/PullTailAnim.gif");
+  background-size: cover;
+}
+
+.portfolio__item.item_4::after {
+  background-image: url("../images/PullTailAnim.gif");
+  background-size: cover;
+}
+
+.portfolio__item.item_5::after {
+  background-image: url("../images/PullTailAnim.gif");
+  background-size: cover;
+}
+
+.portfolio__item.item_6::after {
+  background-image: url("../images/PullTailAnim.gif");
+  background-size: cover;
+} */
+
+.videoBGportfolio {
+  position: absolute;
+  /* max-width: 100%; */
+  border-radius: 35px;
+  opacity: 0;
+  height: 100%; 
+}
+
+.portfolio__item:hover:after{    
+  height: 100%;
+  opacity: 1;
+  z-index: 1;
+}
+.portfolio__item:hover .videoBGportfolio {
+  transition: opacity 2.5s;
+  opacity: 1;
+  z-index: 2;
+}
+
+/* .fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background-color: white;
+  z-index: -1;
+  transition: 1.3s ease;
+  border-radius: 35px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.portfolio_item_video {
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio__item:hover .fill {
+  opacity: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.portfolio__item:hover .portfolio_item_video {
+  opacity: 1;
+} */
+/* 
+.portfolio__item:hover {
+  background-color: #ffffffcc;
+  transition: .52s;
+} */
+
+.portfolio_item_img {
+  max-width: 85%;
+  max-height: 240px;
+  z-index: 3;
+}
+.portfolio__item.item_5 .portfolio_item_img {
+  z-index: -1;
+}
+
+/* Адаптивность */
+@media (max-width: 700px) {
+  .portfolio__block {
+    gap: 20px;
+  }
+  .portfolio__item {
+    max-width: 400px;
+    height: 280px;
+    margin-top: 20px;
+  }
+}
+@media (max-width: 900px) {
+  .portfolio__item {
+      flex: 1 1 100%; /* На маленьких экранах блоки будут занимать всю ширину */
+  }
+}
+@media (max-width: 400px) {
+  .portfolio__item {
+    max-width: 330px;
+   height: 230px;
+  }
+}
+
+.title.portfolio_outTitle {
+  color: #ffffff;
+  font-size: 35px;
+}
+
+/* ---------------------------------END: portfolio block------------------------------------------ */
+
+
+
+
+

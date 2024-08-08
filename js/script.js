@@ -46,3 +46,23 @@ class Writer {
 
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Для мобильных устройств или если скроллим вверх
     });
+
+    const portfolioItems = document.querySelectorAll(".portfolio__item");
+
+    portfolioItems.forEach((item) => {
+        const video = item.querySelector(".videoBGportfolio");
+        
+        item.addEventListener("mouseenter", () => {
+            if (video) {
+                video.play();
+            }
+        });
+    
+        item.addEventListener("mouseleave", () => {
+            if (video) {
+                video.pause();
+                video.currentTime = 0; // Сброс видео на начало
+            }
+        });
+    });
+    
