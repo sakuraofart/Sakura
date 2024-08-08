@@ -13,16 +13,121 @@ header{
     position: fixed;
     width: 100%;
     height: 50px;
-    padding: 12px 60px;
+    padding: 6px 60px;
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(22px);
     z-index: 99999999999999;
+    overflow: hidden;
 }
+
+.opened {
+  animation: openHeader .32s ease-in-out forwards;
+  height: 100%; /* Конечная высота после открытия */
+}
+
+@keyframes openHeader {
+  0% {
+    height: 50px; /* Начальная высота при открытии */
+  }
+  100% {
+    height: 100%; /* Конечная высота при открытии */
+  }
+}
+
+.closed {
+  animation: closeHeader .32s ease-in-out forwards;
+  height: 50px; /* Конечная высота после закрытия */
+}
+
+@keyframes closeHeader {
+  0% {
+    height: 100%; /* Начальная высота при закрытии */
+  }
+  100% {
+    height: 50px; /* Конечная высота при закрытии */
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 5px 20px;
+  }
+}
+
+
 header ul{
     display: flex;
     flex-direction: row;
     list-style-type: none;
 }
+
+.vertical-menu {
+  position: absolute;
+  list-style-type: none; /* Убираем маркеры списка */
+  padding: 0; /* Убираем отступы */
+  margin: 0; /* Убираем отступы */
+  margin-top: 100px;
+  opacity: 0;
+  /* display: flex; */
+  /* display: none; */
+  flex-direction: column; /* Делаем элементы списка вертикальными */
+  align-items: flex-start; /* Выравниваем элементы по левому краю */
+}
+
+.menuIsOpen {
+  display: flex;
+  opacity: 0;
+  animation: fadeIn .5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.menuIsClose {
+  opacity: 1;
+  animation: fadeOut .5s ease-in-out forwards;
+}
+
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.menu-burger, .menu-close {
+  animation: fadeIn .44s ease-in-out forwards;
+
+}
+
+
+.vertical-menu li {
+  margin: 10px 0; /* Добавляем вертикальные отступы между элементами */
+}
+
+.vertical-menu-item {
+  text-decoration: none; /* Убираем подчеркивание ссылок */
+  color: #ffffff; /* Цвет текста */
+  font-size: 28px; /* Размер текста */
+  padding: 10px 20px; /* Внутренние отступы */
+  border-radius: 5px; /* Сглаживание углов */
+}
+
+.vertical-menu-item:hover {
+  color: #7e7e7e; /* Цвет текста при наведении */
+  text-decoration: none; /* Убираем подчеркивание ссылок */
+  transition: color .3s;
+}
+
 
 div{
     color: #ffffff;

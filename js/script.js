@@ -65,4 +65,46 @@ class Writer {
             }
         });
     });
+
+    function disableScroll() {
+      document.body.style.overflow = 'hidden';
+    }
     
+    // Для разблокировки прокрутки
+    function enableScroll() {
+      document.body.style.overflow = '';
+    }
+    
+    const menu = document.querySelector(".menu");
+
+
+    if ( window.innerWidth < 850) {
+      const verticalMenu = document.querySelector(".vertical-menu");
+      menuBurgerHTML = "<img class='menu-burger' style='margin-top: 12px' width='20px' src='./images/AllAssets/hamburger.png'>"
+      menu.innerHTML = menuBurgerHTML;
+      closeCrossHTML = "<img class='menu-close' style='margin-top: 12px' width='18px' src='./images/AllAssets/Crossclose.png'>"
+      const burger = document.querySelector('.menu-burger');
+      menu.addEventListener("click", function toggleMenu() {
+        const header = document.querySelector('header');
+        if (header.classList.contains("opened")) {
+          header.classList.remove("opened");
+          header.classList.add("closed");
+          verticalMenu.classList.remove("menuIsOpen")
+          verticalMenu.classList.add("menuIsClose")
+          enableScroll()
+          
+          menu.innerHTML = menuBurgerHTML
+        } else {
+          header.classList.remove("closed");
+          header.classList.add("opened");
+          verticalMenu.classList.add("menuIsOpen")
+          verticalMenu.classList.remove("menuIsClose")
+          disableScroll()
+
+          menu.innerHTML = closeCrossHTML
+        }
+      });
+    
+    } else {
+      menu.style.marginTop = "7px"
+    }
