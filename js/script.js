@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", function () {
+
 class Writer {
     constructor(node) {
       this.node = node;
@@ -124,3 +126,63 @@ updateMenu();
 
 // Обработчик события resize для обновления меню при изменении размера окна
 window.addEventListener('resize', updateMenu);
+
+
+// --------------------------------- Start Portfolio Mobile Animation---------------------------------
+if (window.innerWidth < 900) {
+  const items = document.querySelectorAll('.portfolio__item');
+  let index = 0;
+
+  function triggerAnimation() {
+    // Убираем предыдущий активный класс, если это не первый элемент
+    if (index > 0) {
+      const prevVideo = items[index - 1].querySelector('.videoBGportfolio');
+      items[index - 1].classList.remove('hover');
+      if (prevVideo) {
+        prevVideo.pause(); // Останавливаем предыдущее видео
+      }
+    }
+
+    // Добавляем активный класс для текущего элемента
+    const currentItem = items[index];
+    const currentVideo = currentItem.querySelector('.videoBGportfolio');
+    currentItem.classList.add('hover');
+
+    if (currentVideo) {
+      currentVideo.currentTime = 0; // Сбрасываем видео к началу
+      currentVideo.play(); // Воспроизводим видео
+    }
+
+    // Увеличиваем индекс
+    index++;
+
+    // Проверяем, достигли ли мы конца списка элементов
+    if (index < items.length) {
+      // Если нет, запускаем анимацию для следующего блока через 3 секунды
+      setTimeout(triggerAnimation, 7000);
+    } else {
+      // Если да, то сбрасываем анимацию и начинаем заново через 3 секунды
+      setTimeout(() => {
+        const lastVideo = items[items.length - 1].querySelector('.videoBGportfolio');
+        items[items.length - 1].classList.remove('hover');
+        if (lastVideo) {
+          lastVideo.pause(); // Останавливаем последнее видео
+        }
+        index = 0; // Сбрасываем индекс
+        triggerAnimation(); // Запускаем цикл заново
+      }, 3000);
+    }
+  }
+
+  // Запускаем цикл анимации
+  triggerAnimation();
+}
+// --------------------------------- END Portfolio Mobile Animation---------------------------------
+
+
+
+
+
+
+
+})

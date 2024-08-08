@@ -1,6 +1,10 @@
+@font-face {
+  font-family: "San Francisco";
+  src: url("../fonts/sf-ui-display-regular.ttf");
+}
 * {
-  font-family: 'San-Francisco';
-  src: url("../fonts/san_francisco-webfont.woff2");
+  font-family: "San Francisco";
+
 }
 body{
     background-color: black;
@@ -128,6 +132,14 @@ header ul{
   transition: color .3s;
 }
 
+.viewSerBut {
+  color: #ffffffb7;
+}
+.viewSerBut:hover {
+  transition: .33s;
+  color: aliceblue;
+  text-decoration: none;
+}
 
 div{
     color: #ffffff;
@@ -154,10 +166,11 @@ div{
 .main-block{
     max-width: 425px;
     margin: 0 auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.103);
+    box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 35px;
-    padding: 20px;
-    backdrop-filter: blur(20px);
+    padding: 26px;
+    backdrop-filter: blur(35px);
     margin: 0;
 }
 .logo{
@@ -173,6 +186,43 @@ div{
     font-size: 48px;
     font-weight: 500;
 }
+
+.mainTitle {
+  text-align: start;
+}
+
+.scrollArrowCont {
+  position: absolute;
+  margin-top: 600px;
+  transform: translateX(-50%);
+  left: 50%;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 2s 3.8s ease-in-out forwards;
+}
+
+
+.DownArrow {
+  position: absolute;
+ max-width: 17px;
+ animation: UpAndDown 2s infinite;
+ margin-top: 0px;
+ margin-left: -9px;
+}
+
+@keyframes UpAndDown {
+  0% {
+    margin-top: 0px;
+  }
+  50% {
+    margin-top: 12px;
+  }
+  100% {
+    margin-top: 0px;
+  }
+}
+
 .title::after {
     content: "";
     position: absolute;
@@ -254,8 +304,11 @@ div{
   text-align: center;
 }
 hr {
-  opacity: 0.3;
-  max-width: 400px;
+  opacity: 0.6;
+  height: 1.4px;
+  max-width: 300px;
+  background-color: rgb(255, 255, 255);
+  border: none;
 }
 
 .portfolio__block {
@@ -269,7 +322,7 @@ hr {
 }
 
 .portfolio__item {
-  background-color: #ffffff7c;
+  background-color: #3d3d3d7c;
   backdrop-filter: blur(30px);
   color: white;
   padding: 20px;
@@ -420,6 +473,19 @@ hr {
   color: #ffffff;
   font-size: 35px;
 }
+
+
+.portfolio__item.hover:after {    
+  height: 100%;
+  opacity: 1;
+  z-index: 1;
+}
+.portfolio__item.hover .videoBGportfolio {
+  transition: opacity 2.5s;
+  opacity: 1;
+  z-index: 2;
+}
+
 
 /* ---------------------------------END: portfolio block------------------------------------------ */
 
