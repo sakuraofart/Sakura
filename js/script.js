@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!this.node) return;
 
-      this.timer = 52; // .2s
+      this.timer = 45; // .2s
       this.broken = this.node.textContent.split("");
 
       this._init();
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //ANIMATION BACKGROUND VIDEO
   const video = document.getElementById("backgroundVideo");
   let lastScrollTop = 0;
-
+  if(video) {
   window.addEventListener("scroll", () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-
+  }
   const menu = document.querySelector(".menu");
   const verticalMenu = document.querySelector(".vertical-menu");
   const menuStartHTML = menu.innerHTML;
@@ -153,12 +153,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const target = document.querySelector(".portfolio");
 
     function checkScroll() {
-      
+      if (target) {
       const targetOffsetTop = target.offsetTop;
       const windowScrollTop = window.scrollY;
       const windowHeight = window.innerHeight;
 
       // Проверяем, виден ли элемент
+      
+
       if (
         targetOffsetTop < windowScrollTop + windowHeight &&
         targetOffsetTop + target.offsetHeight > windowScrollTop
@@ -212,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 1000)
         window.removeEventListener("scroll", checkScroll);
       }
-      
+    }
     }
 
     window.addEventListener("scroll", checkScroll);

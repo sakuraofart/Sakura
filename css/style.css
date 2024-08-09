@@ -82,6 +82,15 @@ header ul {
   flex-direction: row;
   list-style-type: none;
 }
+@media (max-width: 900px) {
+  .menu {
+    width: 40px;
+  }
+  .menu img {
+    margin-left: 20px;
+  }
+}
+
 
 .vertical-menu {
   position: absolute;
@@ -228,6 +237,7 @@ div {
 .logo:hover {
   color: #aeaeae;
   text-decoration: none;
+  transition: color .44s;
 }
 
 .title {
@@ -389,6 +399,14 @@ hr {
   max-width: 1200px;
 }
 
+@media (min-width: 1450px) {
+  .portfolio__block {
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: left;
+  }
+}
+
 .portfolio__item {
   background-color: #3d3d3d7c;
   backdrop-filter: blur(30px);
@@ -398,7 +416,7 @@ hr {
   text-align: center;
   flex: 1 1 40%;
   /* Блоки будут занимать по 30% ширины и переноситься на новую строку при необходимости */
-  max-width: 450px;
+  max-width: 440px;
   height: 300px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 35px;
