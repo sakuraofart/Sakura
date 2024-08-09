@@ -5,13 +5,19 @@
 
 * {
   font-family: "San Francisco";
-
 }
 
 body {
   background-color: black;
   height: 2000px;
+  cursor: url("../images/AllAssets/circleCursor.png"), auto;
 }
+
+a, button {
+  cursor: url("../images/AllAssets/circleCursor.png "), auto;
+
+}
+
 
 header {
   display: flex;
@@ -471,6 +477,9 @@ hr {
     transition: opacity 0.3s 0.1s;
     opacity: 1;
     z-index: 2;
+  }
+  .portfolio__item:hover .portfolio_item_img {
+    animation: fadeOut .43s 3s ease-in-out forwards;
   }
 }
 .activated:after {
