@@ -456,6 +456,10 @@ hr {
   height: 100%;
 }
 
+.videoBGportfolio.needBig {
+  height: 102%;
+}
+
 @media (min-width: 900px) {
   .portfolio__item:hover:after {
     height: 100%;
@@ -520,9 +524,9 @@ hr {
   z-index: 4;
 }
 
-.portfolio__item.item_5 .portfolio_item_img {
+/* .portfolio__item.item_5 .portfolio_item_img {
   z-index: -1;
-}
+} */
 
 /* Адаптивность */
 @media (max-width: 700px) {

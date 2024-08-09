@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // Проверяем, достигли ли мы конца списка элементов
           if (index < items.length) {
             // Если нет, запускаем анимацию для следующего блока через 3 секунды
-            setTimeout(triggerAnimation, 3250);
+            setTimeout(triggerAnimation, 6250);
           } else {
             // Если да, то сбрасываем анимацию и начинаем заново через 3 секунды
             setTimeout(() => {
