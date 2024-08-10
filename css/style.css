@@ -34,6 +34,11 @@ header {
   overflow: hidden;
 }
 
+.main-about__text{
+  max-width: 632px;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
 .opened {
   animation: openHeader .32s ease-in-out forwards;
   height: 100%;
