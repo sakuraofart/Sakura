@@ -229,3 +229,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --------------------------------- END Portfolio Mobile Animation---------------------------------
 });
+
+  // --------------------------------- START About Numbers Animation---------------------------------
+document.addEventListener('DOMContentLoaded', function() {
+  const numberElements = document.querySelectorAll('.about__block-nmb');
+  
+  numberElements.forEach(el => {
+      const textContent = el.textContent.trim();
+      // Проверяем, является ли содержимое числом
+      const maxNumber = parseInt(textContent.replace(/\D/g, ''));
+      if (!isNaN(maxNumber)) {
+          animateNumber(el, 0, maxNumber, 2000); // 2000 - длительность анимации в мс
+      }
+  });
+
+  function animateNumber(element, start, end, duration) {
+      let startTime = null;
+
+      function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const progress = currentTime - startTime;
+          const value = Math.min(Math.floor(progress / duration * (end - start) + start), end);
+          element.textContent = value + (end === 80 ? '+' : ''); // Добавляем '+' к 80
+          if (progress < duration) {
+              requestAnimationFrame(animation);
+          }
+      }
+
+      requestAnimationFrame(animation);
+  }
+});
+ // --------------------------------- END About Numbers Animation---------------------------------

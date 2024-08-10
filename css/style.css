@@ -602,3 +602,43 @@ hr {
 
 
 /* ---------------------------------END: portfolio block------------------------------------------ */
+/* ---------------------------------START: about block------------------------------------------ */
+.about__block{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.about__block-nmb{
+  font-size: 120px;
+}
+.about__block-title{
+  font-size: 22px;
+}
+.about__block-item{
+  margin: 0 40px 25px 0;
+}
+.story-text{
+  font-size: 28px;
+  max-width: 632px;
+  margin-bottom: 169px;
+}
+.why-title{
+  font-size: 52px;
+  margin-bottom: 120px;
+}
+.why__block-nmb{
+  font-size: 52px;
+  margin-bottom: 28px;
+}
+.why__block-title{
+  font-size: 52px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.why-container{
+  max-width: 67%;
+  font-size: 22px;
+}
+.why__block{
+  margin-bottom: 120px;
+}
