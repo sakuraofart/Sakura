@@ -633,7 +633,7 @@ hr {
   max-width: 632px;
   margin-bottom: 169px;
 }
-.why-title{
+.why-title {
   font-size: 52px;
   margin-bottom: 120px;
 }
@@ -652,4 +652,64 @@ hr {
 }
 .why__block{
   margin-bottom: 120px;
+}
+.team_title {
+  font-size: 52px;
+  margin-bottom: 20px;
+}
+.team_intro {
+  font-size: 22px;
+}
+.team_cards {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 45px;
+}
+.team_card {
+  max-width: 400px;
+  height: 500px;
+  background-color: #1a1a1a7c;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  flex: 1 1 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 35px;
+}
+.team_card img {
+  height: auto;
+  max-height: 50%;
+  border-radius: 25px;
+}
+.team_card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.team_card h4 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #b0b0b0;
+}
+.team_card p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.hr_inCards {
+  margin-top: 0px;
+  opacity: 0.3;
+}
+.teamcard_name {
+  color: #ffffff;
+}
+.RoleName {
+  opacity: .44;
+  padding-right: 10px;
+}
+.teamcard_info {
+  text-align: start;
 }
