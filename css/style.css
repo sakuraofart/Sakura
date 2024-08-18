@@ -87,7 +87,6 @@ header {
   }
 }
 
-
 header ul {
   display: flex;
   flex-direction: row;
@@ -346,6 +345,16 @@ div {
   flex-direction: row;
 }
 
+/* .contact__block {
+  background-color: #1616167c;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  color: white;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 35px;
+} */
+
 .contact__title {
   font-size: 74px;
 }
@@ -358,6 +367,7 @@ div {
 .contact__mail {
   display: flex;
   flex-direction: row;
+  flex: 1 1 40%
 }
 
 .contact__mail div {
@@ -375,6 +385,35 @@ div {
   color: #ffffff;
   font-weight: 300;
 }
+
+.contact__mail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.contact__mail-client,
+.contact__mail_job {
+  flex: 1;
+  min-width: 200px; /* Ensure some minimum width for each item */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact__mail {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .contact__mail-client,
+  .contact__mail_job {
+      width: 100%;
+  }
+}
+
 
 /* ---------------------------------START: portfolio block------------------------------------------ */
 .portfolio {
@@ -670,8 +709,8 @@ hr {
 }
 .team_card {
   max-width: 400px;
-  height: 500px;
-  background-color: #1a1a1a7c;
+  height: 600px;
+  background-color: #2424247c;
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   color: white;
@@ -712,4 +751,17 @@ hr {
 }
 .teamcard_info {
   text-align: start;
+  opacity: .8 ;
+}
+@media (max-width: 870px) {
+  .team_card {
+    height: min-content;
+    min-height: 400px;
+  }
+  .team_card img {
+    max-height: 260px;
+  }
+  .team_cards {
+    gap: 30px;
+  }
 }
