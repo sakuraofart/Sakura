@@ -29,23 +29,79 @@ document.addEventListener("DOMContentLoaded", function () {
 
   new Writer(root);
 
-  //ANIMATION BACKGROUND VIDEO
-  const video = document.getElementById("backgroundVideo");
-  let lastScrollTop = 0;
-  if(video) {
-  window.addEventListener("scroll", () => {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  // ANIMATION BACKGROUND VIDEO
+/// ANIMATION BACKGROUND VIDEO
+const video = document.getElementById("backgroundVideo");
+const targetElement = document.querySelector(".main-about__text");
+let videoPlayed = false;
+let videoPaused = false;
+let videoTimeout;
+let videoEnded = false;
 
-    if (scrollTop > lastScrollTop) {
-      // Скроллим вниз
+if (video && targetElement) {
+  function checkVisibility() {
+    const rect = targetElement.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+    // Проверяем, что элемент виден в пределах окна просмотра
+    return rect.top <= windowHeight && rect.bottom >= 0;
+  }
+
+  function handleScroll() {
+    if (videoEnded) return; // Если видео закончилось, не выполняем никаких действий
+
+    if (!videoPlayed) {
       video.play();
-    } else {
-      // Скроллим вверх
-      video.currentTime -= 0.001; // Уменьшаем время на 0.1 секунды
+      videoPlayed = true;
+
+      // Останавливаем видео через 2 секунды
+      videoTimeout = setTimeout(() => {
+        video.pause();
+        videoPaused = true;
+      }, 3370);
     }
 
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Для мобильных устройств или если скроллим вверх
+    // Если видео приостановлено, возобновляем воспроизведение, когда элемент снова видим
+    if (videoPaused && checkVisibility()) {
+      video.play();
+      videoPaused = false;
+    }
+  }
+
+  // Обрабатываем случай, если видео уже было проиграно и страница загружена
+  function handleLoad() {
+    if (checkVisibility()) {
+      handleScroll();
+    }
+  }
+
+  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("load", handleLoad);
+
+  // Обрабатываем случай окончания видео
+  video.addEventListener('ended', () => {
+    videoPaused = true;
+    videoEnded = true;
   });
+
+  video.addEventListener('loadedmetadata', () => {
+    const videoLengthToStop = video.duration - 1.014;
+    console.log(videoLengthToStop);
+
+  // Проверяем текущее время воспроизведения видео
+  video.addEventListener('timeupdate', () => {
+    if (video.currentTime >= videoLengthToStop && !videoEnded) {
+      video.pause()
+      // Удаляем обработчик, чтобы не выводить сообщение многократно
+      video.removeEventListener('timeupdate', arguments.callee);
+    }
+  });  
+});
+}
+
+
+
+// ---------------------------------------------------------------------------------------------
 
   const portfolioItems = document.querySelectorAll(".portfolio__item");
 
@@ -65,7 +121,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-  }
+
+
+
   const menu = document.querySelector(".menu");
   const verticalMenu = document.querySelector(".vertical-menu");
   const menuStartHTML = menu.innerHTML;
