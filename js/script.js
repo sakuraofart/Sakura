@@ -92,10 +92,8 @@ if (video && targetElement) {
 
   // Проверяем текущее время воспроизведения видео
   video.addEventListener('timeupdate', () => {
-    if (video.currentTime >= videoLengthToStop && !videoEnded) {
+    if (video.currentTime >= 13 && !videoEnded) {
       video.pause()
-      // Удаляем обработчик, чтобы не выводить сообщение многократно
-      video.removeEventListener('timeupdate', arguments.callee);
     }
   });  
 });
@@ -225,7 +223,7 @@ if (video && targetElement) {
         targetOffsetTop < windowScrollTop + windowHeight &&
         targetOffsetTop + target.offsetHeight > windowScrollTop
       ) {
-        console.log("Элемент виден!");
+        console.log("Блок портфолио виден");
 
         function triggerAnimation() {
           // Убираем предыдущий активный класс, если это не первый элемент
