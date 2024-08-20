@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /// ANIMATION BACKGROUND VIDEO
 const video = document.getElementById("backgroundVideo");
 const targetElement = document.querySelector(".main-about__text");
+const mainTitleBlock = document.querySelector(".main-block")
 let videoPlayed = false;
 let videoPaused = false;
 let videoTimeout;
@@ -58,6 +59,7 @@ if (video && targetElement) {
       videoTimeout = setTimeout(() => {
         video.pause();
         videoPaused = true;
+        mainTitleBlock.classList.add("main-block-fadeIn")
       }, 3370);
     }
 
@@ -86,7 +88,7 @@ if (video && targetElement) {
 
   video.addEventListener('loadedmetadata', () => {
     const videoLengthToStop = video.duration - 1.014;
-    console.log(videoLengthToStop);
+    // console.log(videoLengthToStop);
 
   // Проверяем текущее время воспроизведения видео
   video.addEventListener('timeupdate', () => {

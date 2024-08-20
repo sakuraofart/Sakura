@@ -230,13 +230,25 @@ div {
 .main-block {
   max-width: 425px;
   margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.103);
-  box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 35px;
   padding: 26px;
-  backdrop-filter: blur(35px);
-  -webkit-backdrop-filter: blur(35px);
   margin: 0;
+}
+.main-block-fadeIn {
+  animation: fadeBlur 0.77s ease-in-out forwards;
+}
+
+@keyframes fadeBlur {
+  0% {
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.103);
+    box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+  }
 }
 
 .logo {
@@ -338,6 +350,14 @@ div {
   height: 100%;
   object-fit: fit;
   z-index: -1;
+}
+
+@media (max-width: 600px) {
+  #backgroundVideo {
+    height: 900px;
+    right: -70%;
+
+  }
 }
 
 .contact {
