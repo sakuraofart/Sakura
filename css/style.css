@@ -19,6 +19,12 @@ a, button {
 }
 
 
+::selection {
+  border-radius: 23px;
+  background-color: rgba(255, 255, 255, 0.24);
+  color:#ff92e4
+}
+
 header {
   display: flex;
   flex-direction: row;
@@ -82,7 +88,6 @@ header {
     padding: 5px 20px;
   }
 }
-
 
 header ul {
   display: flex;
@@ -227,13 +232,25 @@ div {
 .main-block {
   max-width: 425px;
   margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.103);
-  box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 35px;
   padding: 26px;
-  backdrop-filter: blur(35px);
-  -webkit-backdrop-filter: blur(35px);
   margin: 0;
+}
+.main-block-fadeIn {
+  animation: fadeBlur 0.77s ease-in-out forwards;
+}
+
+@keyframes fadeBlur {
+  0% {
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.103);
+    box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+  }
 }
 
 .logo {
@@ -337,10 +354,28 @@ div {
   z-index: -1;
 }
 
+@media (max-width: 600px) {
+  #backgroundVideo {
+    height: 900px;
+    right: -70%;
+
+  }
+}
+
 .contact {
   display: flex;
   flex-direction: row;
 }
+
+/* .contact__block {
+  background-color: #1616167c;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  color: white;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 35px;
+} */
 
 .contact__title {
   font-size: 74px;
@@ -354,6 +389,7 @@ div {
 .contact__mail {
   display: flex;
   flex-direction: row;
+  flex: 1 1 40%
 }
 
 .contact__mail div {
@@ -371,6 +407,35 @@ div {
   color: #ffffff;
   font-weight: 300;
 }
+
+.contact__mail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.contact__mail-client,
+.contact__mail_job {
+  flex: 1;
+  min-width: 200px; /* Ensure some minimum width for each item */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact__mail {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .contact__mail-client,
+  .contact__mail_job {
+      width: 100%;
+  }
+}
+
 
 /* ---------------------------------START: portfolio block------------------------------------------ */
 .portfolio {
@@ -629,10 +694,7 @@ hr {
   max-width: 632px;
   margin-bottom: 169px;
 }
-.why{
-  padding-bottom: 60px;
-}
-.why-title{
+.why-title {
   font-size: 52px;
   margin-bottom: 120px;
 }
@@ -652,40 +714,76 @@ hr {
 .why__block{
   margin-bottom: 120px;
 }
-/* ---------------------------------END: about block------------------------------------------ */
-/* ---------------------------------START: services block------------------------------------------ */
-
-.services-main-block{
-  width: 50%;
-}
-.services__title{
-  margin-bottom: 40px;
-  font-size: 60px;
-  font-weight: 500;
-}
-.services__subtitle{
-  font-weight: 500;
-  font-size: 36px;
-}
-.websites__text{
-  max-width: 50%;
-}
-.websites__title{
-  font-size: 42px;
+.team_title {
+  font-size: 52px;
   margin-bottom: 20px;
 }
-.websites__subtitle{
-  font-size: 25px;
+.team_intro {
+  font-size: 22px;
 }
-.websites__services{
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: 20px;
+.team_cards {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 45px;
 }
-.websites__services li{
+.team_card {
+  max-width: 400px;
+  height: 600px;
+  background-color: #2424247c;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  flex: 1 1 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 35px;
+}
+.team_card img {
+  height: auto;
+  max-height: 50%;
+  border-radius: 25px;
+}
+.team_card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.team_card h4 {
   font-size: 20px;
+  margin-bottom: 15px;
+  color: #b0b0b0;
 }
-.websites{
-  height: 100vh;
+.team_card p {
+  font-size: 16px;
+  margin-bottom: 10px;
 }
-/* ---------------------------------END: services block------------------------------------------ */
+.hr_inCards {
+  margin-top: 0px;
+  opacity: 0.3;
+}
+.teamcard_name {
+  color: #ffffff;
+}
+.RoleName {
+  opacity: .44;
+  padding-right: 10px;
+}
+.teamcard_info {
+  text-align: start;
+  opacity: .8 ;
+}
+@media (max-width: 870px) {
+  .team_card {
+    height: min-content;
+    min-height: 400px;
+  }
+  .team_card img {
+    max-height: 260px;
+  }
+  .team_cards {
+    gap: 30px;
+  }
+}
