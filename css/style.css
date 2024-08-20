@@ -33,7 +33,9 @@ header {
   z-index: 99999999999999;
   overflow: hidden;
 }
-
+.main-about{
+  padding-bottom: 80px;
+}
 .main-about__text{
   max-width: 632px;
   font-size: 28px;
@@ -627,6 +629,9 @@ hr {
   max-width: 632px;
   margin-bottom: 169px;
 }
+.why{
+  padding-bottom: 60px;
+}
 .why-title{
   font-size: 52px;
   margin-bottom: 120px;
@@ -647,3 +652,40 @@ hr {
 .why__block{
   margin-bottom: 120px;
 }
+/* ---------------------------------END: about block------------------------------------------ */
+/* ---------------------------------START: services block------------------------------------------ */
+
+.services-main-block{
+  width: 50%;
+}
+.services__title{
+  margin-bottom: 40px;
+  font-size: 60px;
+  font-weight: 500;
+}
+.services__subtitle{
+  font-weight: 500;
+  font-size: 36px;
+}
+.websites__text{
+  max-width: 50%;
+}
+.websites__title{
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+.websites__subtitle{
+  font-size: 25px;
+}
+.websites__services{
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+.websites__services li{
+  font-size: 20px;
+}
+.websites{
+  height: 100vh;
+}
+/* ---------------------------------END: services block------------------------------------------ */
