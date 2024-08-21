@@ -230,7 +230,7 @@ div {
 }
 
 .main-block {
-  max-width: 425px;
+  max-width: 500px;
   margin: 0 auto;
   border-radius: 35px;
   padding: 26px;
@@ -283,6 +283,11 @@ div {
   text-align: center;
   opacity: 0;
   animation: fadeIn 2s 3.3s ease-in-out forwards;
+}
+.scrollArrowCont.onServices {
+  margin-top: 170px;
+  animation: fadeIn 0.77s 1s ease-in-out forwards;
+
 }
 
 .TextFadeOut {
@@ -354,14 +359,58 @@ div {
   z-index: -1;
 }
 
+#StaticBackgroundVideo {
+  position: fixed;
+  top: 0;
+  right: 50%;
+  width: 1000px;
+  transform: scale(-1, 1);
+  /* height: 100%; */
+  object-fit: fit;
+  z-index: -1;
+  opacity: 0;
+  animation: fadeIn 1s 1s ease-in-out forwards;
+}
+
 @media (max-width: 600px) {
   #backgroundVideo {
     height: 900px;
     right: -70%;
-
+  }
+  #StaticBackgroundVideo {
+    top: 150px;
+    right: -40%;
+    /* width: 100%; */
+    height: 80%;
   }
 }
 
+@media (max-width: 400px) {
+  #StaticBackgroundVideo {
+    top: 150px;
+    right: -55%;
+    /* width: 100%; */
+    height: 80%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 770px) {
+  #StaticBackgroundVideo {
+    top: 150px;
+    right: -10%;
+    /* width: 100%; */
+    height: 80%;
+  }
+}
+
+@media (min-width: 770px) and (max-width: 1000px) {
+  #StaticBackgroundVideo {
+    top: 150px;
+    right: 17%;
+    /* width: 100%; */
+    height: 80%;
+  }
+}
 .contact {
   display: flex;
   flex-direction: row;
@@ -786,4 +835,11 @@ hr {
   .team_cards {
     gap: 30px;
   }
+}
+/* ---------------------------------END: about block------------------------------------------ */
+
+.mainContainer_services {
+  background-color: #24242400;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
 }
