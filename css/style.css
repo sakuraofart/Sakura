@@ -741,7 +741,7 @@ hr {
 .story-text{
   font-size: 28px;
   max-width: 632px;
-  margin-bottom: 169px;
+  margin: 169px 0;
 }
 .why-title {
   font-size: 52px;
@@ -843,3 +843,46 @@ hr {
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
 }
+
+/* ---------------------------------START: section block------------------------------------------ */
+.services__title{
+  font-size: 72px;
+  text-align: center;
+}
+.services__subtitle{
+  font-size: 28px;
+  text-align: center;
+}
+.websites__title{
+  font-size: 52px;
+  margin-bottom: 20px;
+}
+.websites__subtitle{
+  font-size: 22px;
+  margin-bottom: 50px;
+}
+.websites__services{
+  font-size: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+.websites{
+  height: 100vh;
+}
+.websites__block{
+  width: 50%;
+}
+@media (max-width: 1400px){
+  .about__block-nmb {
+    font-size: 100px;
+}
+}
+@media (max-width: 1200px){
+  #about{
+    padding-top: 350px;
+  }
+  .about__block-nmb {
+    font-size: 65px;
+}
+}
+/* ---------------------------------END: section block------------------------------------------ */
