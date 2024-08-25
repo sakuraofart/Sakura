@@ -29,79 +29,99 @@ document.addEventListener("DOMContentLoaded", function () {
 
   new Writer(root);
 
-  // ANIMATION BACKGROUND VIDEO
-/// ANIMATION BACKGROUND VIDEO
-const video = document.getElementById("backgroundVideo");
-const targetElement = document.querySelector(".main-about__text");
-const mainTitleBlock = document.querySelector(".main-block")
-let videoPlayed = false;
-let videoPaused = false;
-let videoTimeout;
-let videoEnded = false;
+  /// ANIMATION BACKGROUND VIDEO
+  const video = document.getElementById("backgroundVideo");
+  const targetElement = document.querySelector(".portfolio__block");
+  const mainTitleBlock = document.querySelector(".main-block");
+  let videoPlayed = false;
+  let videoPaused = false;
+  let videoTimeout;
+  let videoEnded = false;
 
-if (video && targetElement) {
-  function checkVisibility() {
-    const rect = targetElement.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  if (video && targetElement) {
+    function checkVisibility() {
+      const rect = targetElement.getBoundingClientRect();
+      const windowHeight =
+        window.innerHeight || document.documentElement.clientHeight;
 
-    // Проверяем, что элемент виден в пределах окна просмотра
-    return rect.top <= windowHeight && rect.bottom >= 0;
+      // Проверяем, что элемент виден в пределах окна просмотра
+      return rect.top <= windowHeight && rect.bottom >= 0;
+    }
+
+    function handleScroll() {
+      if (videoEnded) return; // Если видео закончилось, не выполняем никаких действий
+
+      if (!videoPlayed) {
+        video.play();
+        videoPlayed = true;
+
+        // Останавливаем видео через 2 секунды
+        videoTimeout = setTimeout(() => {
+          video.pause();
+          videoPaused = true;
+          mainTitleBlock.classList.add("main-block-fadeIn");
+        }, 3370);
+      }
+
+      // Если видео приостановлено, возобновляем воспроизведение, когда элемент снова видим
+      if (videoPaused && checkVisibility()) {
+        video.play();
+        videoPaused = false;
+      }
+    }
+
+    // Обрабатываем случай, если видео уже было проиграно и страница загружена
+    function handleLoad() {
+      if (checkVisibility()) {
+        handleScroll();
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("load", handleLoad);
+
+    // Обрабатываем случай окончания видео
+    video.addEventListener("ended", () => {
+      videoPaused = true;
+      videoEnded = true;
+    });
+
+    video.addEventListener("loadedmetadata", () => {
+      const videoLengthToStop = video.duration - 1.014;
+      // console.log(videoLengthToStop);
+
+      // Проверяем текущее время воспроизведения видео
+      video.addEventListener("timeupdate", () => {
+        if (video.currentTime >= 13 && !videoEnded) {
+          video.pause();
+        }
+      });
+    });
   }
 
-  function handleScroll() {
-    if (videoEnded) return; // Если видео закончилось, не выполняем никаких действий
+  // ---------------------------------------------------------------------------------------------
 
-    if (!videoPlayed) {
-      video.play();
-      videoPlayed = true;
+  // --------------------------------------ShortInfoBlock Script-------------------------------------
+  const accordionItems = document.querySelectorAll(".accordion-item button");
+  if (accordionItems) {
+    accordionItems.forEach((item) => {
+      item.addEventListener("click", function () {
+        const isActive = this.classList.contains("active");
+        closeAllAccordionItems();
+        if (!isActive) {
+          this.classList.add("active");
+        }
+      });
+    });
 
-      // Останавливаем видео через 2 секунды
-      videoTimeout = setTimeout(() => {
-        video.pause();
-        videoPaused = true;
-        mainTitleBlock.classList.add("main-block-fadeIn")
-      }, 3370);
-    }
-
-    // Если видео приостановлено, возобновляем воспроизведение, когда элемент снова видим
-    if (videoPaused && checkVisibility()) {
-      video.play();
-      videoPaused = false;
-    }
-  }
-
-  // Обрабатываем случай, если видео уже было проиграно и страница загружена
-  function handleLoad() {
-    if (checkVisibility()) {
-      handleScroll();
+    function closeAllAccordionItems() {
+      accordionItems.forEach((item) => {
+        item.classList.remove("active");
+      });
     }
   }
 
-  window.addEventListener("scroll", handleScroll);
-  window.addEventListener("load", handleLoad);
-
-  // Обрабатываем случай окончания видео
-  video.addEventListener('ended', () => {
-    videoPaused = true;
-    videoEnded = true;
-  });
-
-  video.addEventListener('loadedmetadata', () => {
-    const videoLengthToStop = video.duration - 1.014;
-    // console.log(videoLengthToStop);
-
-  // Проверяем текущее время воспроизведения видео
-  video.addEventListener('timeupdate', () => {
-    if (video.currentTime >= 13 && !videoEnded) {
-      video.pause()
-    }
-  });  
-});
-}
-
-
-
-// ---------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------------------------
 
   const portfolioItems = document.querySelectorAll(".portfolio__item");
 
@@ -121,8 +141,6 @@ if (video && targetElement) {
       }
     });
   });
-
-
 
   const menu = document.querySelector(".menu");
   const verticalMenu = document.querySelector(".vertical-menu");
@@ -212,67 +230,66 @@ if (video && targetElement) {
 
     function checkScroll() {
       if (target) {
-      const targetOffsetTop = target.offsetTop;
-      const windowScrollTop = window.scrollY;
-      const windowHeight = window.innerHeight;
+        const targetOffsetTop = target.offsetTop;
+        const windowScrollTop = window.scrollY;
+        const windowHeight = window.innerHeight;
 
-      // Проверяем, виден ли элемент
-      
+        // Проверяем, виден ли элемент
 
-      if (
-        targetOffsetTop < windowScrollTop + windowHeight &&
-        targetOffsetTop + target.offsetHeight > windowScrollTop
-      ) {
-        console.log("Блок портфолио виден");
+        if (
+          targetOffsetTop < windowScrollTop + windowHeight &&
+          targetOffsetTop + target.offsetHeight > windowScrollTop
+        ) {
+          console.log("Блок портфолио виден");
 
-        function triggerAnimation() {
-          // Убираем предыдущий активный класс, если это не первый элемент
-          if (index > 0) {
-            const prevVideo =
-              items[index - 1].querySelector(".videoBGportfolio");
-            items[index - 1].classList.remove("hover");
-            if (prevVideo) {
-              prevVideo.pause(); // Останавливаем предыдущее видео
+          function triggerAnimation() {
+            // Убираем предыдущий активный класс, если это не первый элемент
+            if (index > 0) {
+              const prevVideo =
+                items[index - 1].querySelector(".videoBGportfolio");
+              items[index - 1].classList.remove("hover");
+              if (prevVideo) {
+                prevVideo.pause(); // Останавливаем предыдущее видео
+              }
+            }
+
+            // Добавляем активный класс для текущего элемента
+            const currentItem = items[index];
+            const currentVideo = currentItem.querySelector(".videoBGportfolio");
+            currentItem.classList.add("hover");
+
+            if (currentVideo) {
+              currentVideo.currentTime = 0; // Сбрасываем видео к началу
+              currentVideo.play(); // Воспроизводим видео
+            }
+
+            // Увеличиваем индекс
+            index++;
+
+            // Проверяем, достигли ли мы конца списка элементов
+            if (index < items.length) {
+              // Если нет, запускаем анимацию для следующего блока через 3 секунды
+              setTimeout(triggerAnimation, 6250);
+            } else {
+              // Если да, то сбрасываем анимацию и начинаем заново через 3 секунды
+              setTimeout(() => {
+                const lastVideo =
+                  items[items.length - 1].querySelector(".videoBGportfolio");
+                items[items.length - 1].classList.remove("hover");
+                if (lastVideo) {
+                  lastVideo.pause(); // Останавливаем последнее видео
+                }
+                index = 0; // Сбрасываем индекс
+                triggerAnimation(); // Запускаем цикл заново
+              }, 3000);
             }
           }
-
-          // Добавляем активный класс для текущего элемента
-          const currentItem = items[index];
-          const currentVideo = currentItem.querySelector(".videoBGportfolio");
-          currentItem.classList.add("hover");
-
-          if (currentVideo) {
-            currentVideo.currentTime = 0; // Сбрасываем видео к началу
-            currentVideo.play(); // Воспроизводим видео
-          }
-
-          // Увеличиваем индекс
-          index++;
-
-          // Проверяем, достигли ли мы конца списка элементов
-          if (index < items.length) {
-            // Если нет, запускаем анимацию для следующего блока через 3 секунды
-            setTimeout(triggerAnimation, 6250);
-          } else {
-            // Если да, то сбрасываем анимацию и начинаем заново через 3 секунды
-            setTimeout(() => {
-              const lastVideo =
-                items[items.length - 1].querySelector(".videoBGportfolio");
-              items[items.length - 1].classList.remove("hover");
-              if (lastVideo) {
-                lastVideo.pause(); // Останавливаем последнее видео
-              }
-              index = 0; // Сбрасываем индекс
-              triggerAnimation(); // Запускаем цикл заново
-            }, 3000);
-          }
+          setTimeout(() => {
+            triggerAnimation();
+          }, 1000);
+          window.removeEventListener("scroll", checkScroll);
         }
-        setTimeout(() => {
-          triggerAnimation()
-        }, 1000)
-        window.removeEventListener("scroll", checkScroll);
       }
-    }
     }
 
     window.addEventListener("scroll", checkScroll);
@@ -288,33 +305,36 @@ if (video && targetElement) {
   // --------------------------------- END Portfolio Mobile Animation---------------------------------
 });
 
-  // --------------------------------- START About Numbers Animation---------------------------------
-document.addEventListener('DOMContentLoaded', function() {
-  const numberElements = document.querySelectorAll('.about__block-nmb');
-  
-  numberElements.forEach(el => {
-      const textContent = el.textContent.trim();
-      // Проверяем, является ли содержимое числом
-      const maxNumber = parseInt(textContent.replace(/\D/g, ''));
-      if (!isNaN(maxNumber)) {
-          animateNumber(el, 0, maxNumber, 2000); // 2000 - длительность анимации в мс
-      }
+// --------------------------------- START About Numbers Animation---------------------------------
+document.addEventListener("DOMContentLoaded", function () {
+  const numberElements = document.querySelectorAll(".about__block-nmb");
+
+  numberElements.forEach((el) => {
+    const textContent = el.textContent.trim();
+    // Проверяем, является ли содержимое числом
+    const maxNumber = parseInt(textContent.replace(/\D/g, ""));
+    if (!isNaN(maxNumber)) {
+      animateNumber(el, 0, maxNumber, 2000); // 2000 - длительность анимации в мс
+    }
   });
 
   function animateNumber(element, start, end, duration) {
-      let startTime = null;
+    let startTime = null;
 
-      function animation(currentTime) {
-          if (startTime === null) startTime = currentTime;
-          const progress = currentTime - startTime;
-          const value = Math.min(Math.floor(progress / duration * (end - start) + start), end);
-          element.textContent = value + (end === 80 ? '+' : ''); // Добавляем '+' к 80
-          if (progress < duration) {
-              requestAnimationFrame(animation);
-          }
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const progress = currentTime - startTime;
+      const value = Math.min(
+        Math.floor((progress / duration) * (end - start) + start),
+        end
+      );
+      element.textContent = value + (end === 80 ? "+" : ""); // Добавляем '+' к 80
+      if (progress < duration) {
+        requestAnimationFrame(animation);
       }
+    }
 
-      requestAnimationFrame(animation);
+    requestAnimationFrame(animation);
   }
 });
- // --------------------------------- END About Numbers Animation---------------------------------
+// --------------------------------- END About Numbers Animation---------------------------------

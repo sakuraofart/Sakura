@@ -15,14 +15,16 @@ body {
 
 a, button {
   cursor: url("../images/AllAssets/2circleCursor.png "), auto;
-
 }
-
+button:hover {
+  cursor: url("../images/AllAssets/2circleCursor.png "), auto;
+}
 
 ::selection {
   border-radius: 23px;
   background-color: rgba(255, 255, 255, 0.24);
-  color:#ff92e4
+  color:#ff92e4;
+  color: #5f4b32;
 }
 
 header {
@@ -237,7 +239,7 @@ div {
   margin: 0;
 }
 .main-block-fadeIn {
-  animation: fadeBlur 0.77s ease-in-out forwards;
+  animation: fadeBlur 0.57s ease-in-out forwards;
 }
 
 @keyframes fadeBlur {
@@ -411,6 +413,100 @@ div {
     height: 80%;
   }
 }
+
+/* --------------------------------------Start ShortInfoBlock------------------------------------- */
+.accordion {
+  width: 100%;
+  max-width: 600px;
+  /* margin: 0 auto; */
+  margin-top: 50px;
+}
+@media (max-width: 770px) {
+  .accordion {
+  margin: 0 auto;
+  margin-top: 50px;
+
+  }
+}
+.accordion-item {
+  margin: 10px;
+
+}
+
+.accordingBlock_title {
+  color: #ffffff;
+  font-size: 40px;
+}
+
+.accordion-item button {
+  width: 100%;
+  padding: 30px;
+  padding-top: 13px;
+
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  max-height: 60px; /* начальная высота кнопки */
+  position: relative;
+  border-radius: 20px;
+  border: none;
+  background-color: #3636362c;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  color: white;
+}
+
+.accordion-item_name {
+  font-size: 24px;
+}
+
+.accordion-item button.active {
+  max-height: 550px; /* высота кнопки при раскрытии */
+  border-radius: 30px;
+  margin-bottom: 5px;
+}
+
+.accordion-item button:hover {
+  background-color: #2b2b2b79;
+}
+
+.accordion-item button:after {
+  /* content: '\002B';  */
+  content: '|'; 
+  font-size: 18px;
+  position: absolute;
+  right: 25px;
+  top: 30px;
+  transform: translateY(-50%) ;
+  transition: transform 0.3s ease;
+}
+
+.accordion-item button.active:after {
+  content: '|'; 
+  transform: translateY(-50%) rotate(-90deg); /* анимация переворота */
+  top: 30px;
+
+}
+
+.accordion-item .accordion-item_text {
+  opacity: 0;
+  max-height: 0;
+  max-width: 98%;
+  transition: opacity .3s ease, max-height 0.3s ease;
+  overflow: hidden;
+}
+
+.accordion-item button.active .accordion-item_text {
+  opacity: 1;
+  max-height: 500px; /* Задайте максимальную высоту для содержимого текста */
+}
+/* --------------------------------------END ShortInfoBlock------------------------------------- */
+
+
+
+
 .contact {
   display: flex;
   flex-direction: row;
