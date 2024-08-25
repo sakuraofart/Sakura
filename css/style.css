@@ -206,6 +206,7 @@ div {
 .about__title {
   opacity: 0;
   animation: fadeIn 3.5s ease-in-out forwards;
+  font-weight: 300;
 }
 
 .container {
@@ -415,11 +416,39 @@ div {
 }
 
 /* --------------------------------------Start ShortInfoBlock------------------------------------- */
+.shortInfoBlock {
+  margin-top: 100px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.textForInfolist {
+  order: 2;
+}
+
+.accordion {
+  order: 1;
+}
+
+
+@media (max-width: 1300px) {
+  .content-container {
+      flex-direction: column;
+  }
+
+  .textForInfolist {
+      order: 1;
+  }
+
+  .accordion {
+      order: 2;
+  }
+}
 .accordion {
   width: 100%;
   max-width: 600px;
   /* margin: 0 auto; */
-  margin-left: 50px;
+  margin: auto;
   margin-top: 50px;
 }
 @media (max-width: 770px) {
@@ -434,10 +463,28 @@ div {
 
 }
 
+.textForInfolist {
+  height: min-content;
+  padding: 25px;
+  max-width: 600px;
+  text-align: start;  
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 130px;
+}
+
 .accordingBlock_title {
   color: #ffffff;
   font-size: 40px;
+  font-weight: 500;
 }
+
+.accordingBlock_text {
+  color: #ffffff;
+  font-size: 25px;
+
+}
+
 
 .accordion-item button {
   width: 100%;
@@ -457,6 +504,7 @@ div {
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   color: white;
+  
 }
 
 .accordion-item_name {
