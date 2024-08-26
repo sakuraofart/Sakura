@@ -288,9 +288,13 @@ div {
   animation: fadeIn 2s 3.3s ease-in-out forwards;
 }
 .scrollArrowCont.onServices {
-  margin-top: 170px;
+  margin-top: 70px;
   animation: fadeIn 0.77s 1s ease-in-out forwards;
 
+}
+
+.scrollArrowCont h3 {
+  font-weight: 300;
 }
 
 .TextFadeOut {
@@ -430,6 +434,11 @@ div {
   order: 1;
 }
 
+.ArrowCont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
 @media (max-width: 1300px) {
   .content-container {
@@ -459,8 +468,11 @@ div {
   }
 }
 .accordion-item {
-  margin: 10px;
+  margin: 10px 0 10px 0;
 
+}
+.shortInfoBlock {
+  padding: 30px;
 }
 
 .textForInfolist {
@@ -471,6 +483,13 @@ div {
   margin-right: auto;
   margin-left: auto;
   margin-top: 130px;
+
+  background-color: rgba(0, 0, 0, 0.103);
+  box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.144);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  border-radius: 35px;
+  border: solid 1px #ffffff2d;
 }
 
 .accordingBlock_title {
@@ -499,12 +518,13 @@ div {
   max-height: 60px; /* начальная высота кнопки */
   position: relative;
   border-radius: 20px;
-  border: none;
-  background-color: #3636362c;
+
+  background-color: #20202000;
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   color: white;
-  
+  border: solid 1px #ffffff2d;
+
 }
 
 .accordion-item_name {
@@ -527,7 +547,7 @@ div {
   font-size: 18px;
   position: absolute;
   right: 25px;
-  top: 30px;
+  top: 27px;
   transform: translateY(-50%) ;
   transition: transform 0.3s ease;
 }
@@ -535,7 +555,7 @@ div {
 .accordion-item button.active:after {
   content: '|'; 
   transform: translateY(-50%) rotate(-90deg); /* анимация переворота */
-  top: 30px;
+  top: 27px;
 
 }
 
@@ -984,39 +1004,91 @@ hr {
 /* ---------------------------------END: about block------------------------------------------ */
 
 .mainContainer_services {
-  background-color: #24242400;
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+
 }
 
 /* ---------------------------------START: section block------------------------------------------ */
 .services__title{
-  font-size: 72px;
+  /* font-weight: 300; */
+  font-size: 70px;
   text-align: center;
 }
 .services__subtitle{
+  font-weight: 300;
   font-size: 28px;
   text-align: center;
+  max-width: 90%;
+  margin: auto;
 }
-.websites__title{
+.services__item__title{
   font-size: 52px;
   margin-bottom: 20px;
 }
-.websites__subtitle{
+.services__item__subtitle{
   font-size: 22px;
   margin-bottom: 50px;
 }
-.websites__services{
+.services__item__services{
   font-size: 20px;
   list-style-type: none;
   padding: 0;
 }
-.websites{
+.services__item{
   height: 100vh;
+
 }
-.websites__block{
+/* 
+.services__item.section {
+    background-color: #24242400;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+} */
+
+.services__item__block{
   width: 50%;
 }
+.blurbg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #24242400;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  opacity: 0;
+}
+.blurbg_In {
+  animation: fadeIn  0.33s ease-in-out forwards;
+}
+.blurbg_Out {
+  animation: fadeOut  0.33s ease-in-out forwards;
+
+}
+
+.container.sevices_item_container {
+  display: flex;
+  flex-direction: row;
+}
+.services__item__illustration {
+  margin: auto;
+}
+.services__item__illustration img {
+  z-index: -1;
+  max-width: 430px;
+}
+
+@media (max-width: 630px){
+  .container.sevices_item_container {
+    display: flex;
+    flex-direction: column;
+  }
+  .services__item__illustration img {
+    position: absolute;
+    max-width: 83%;
+    margin-top: -170px;
+    margin-left: 2%;
+  }
+}
+
 @media (max-width: 1400px){
   .about__block-nmb {
     font-size: 100px;
@@ -1030,4 +1102,33 @@ hr {
     font-size: 65px;
 }
 }
+@media (max-width: 630px){
+  .services__item__block{
+    width: 90%;
+  }
+  .services__title{
+    /* font-weight: 300; */
+    font-size: 50px;
+    text-align: center;
+  }
+}
+.mainSection {
+  background-color: #20202000;
+}
+#fp-nav {
+  background-color: #ffffff00;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 35px;
+  /* border: solid 1px #ffffff41; */
+
+}
+.fp-watermark {
+  display: none;
+}
+#fp-nav ul li a.active span, #fp-nav ul li:hover a.active span, .fp-slidesNav ul li a.active span, .fp-slidesNav ul li:hover a.active span {
+  background: rgba(255, 255, 255, 0.678);
+}
+
+
 /* ---------------------------------END: section block------------------------------------------ */
