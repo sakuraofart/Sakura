@@ -1,3 +1,36 @@
+$(document).ready(function () {
+  // Используем событие pageshow
+  $(window).on("pageshow", function (event) {
+    if (event.originalEvent.persisted) {
+      // Скрываем overlay при возврате на страницу из истории
+      $(".page-transition-overlay").css("display", "none");
+    }
+  });
+
+  $(document).on(
+    "click",
+    'a:not([href*="#section"])',
+    function (e) {
+      e.preventDefault();
+      var href = $(this).attr("href");
+
+      // Показываем overlay
+      $(".page-transition-overlay").fadeIn(260, function () {
+        // После показа overlay, переходим на новую страницу
+        window.location.href = href;
+      });
+    }
+  );
+});
+
+let maska = document.querySelector(".mask");
+window.addEventListener("load", () => {
+  maska.classList.add("hide");
+  setTimeout(() => {
+    maska.remove();
+  }, 300);
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   class Writer {
     constructor(node) {
