@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   new Writer(root);
 
-  /// ANIMATION BACKGROUND VIDEO
+  /// ANIMATION BACKGROUND VIDEO (main)
   const video = document.getElementById("backgroundVideo");
   const targetElement = document.querySelector(".portfolio__block");
   const mainTitleBlock = document.querySelector(".main-block");
@@ -132,6 +132,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  /// ANIMATION BACKGROUND VIDEO (about)
+
+
   // ---------------------------------------------------------------------------------------------
 
   // --------------------------------------ShortInfoBlock Script-------------------------------------
@@ -175,64 +178,78 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+
+
+
+
   const menu = document.querySelector(".menu");
   const verticalMenu = document.querySelector(".vertical-menu");
   const menuStartHTML = menu.innerHTML;
   const header = document.querySelector("header");
-
+  
+  const menuBurgerHTML =
+    "<img class='menu-burger' style='margin-top: 12px' width='20px' src='./images/AllAssets/hamburger.png'>";
+  const closeCrossHTML =
+    "<img class='menu-close' style='margin-top: 12px' width='18px' src='./images/AllAssets/Crossclose.png'>";
+  
   // Функция для обновления меню в зависимости от ширины экрана
   function updateMenu() {
     // Проверка текущей ширины экрана
     if (window.innerWidth < 950) {
-      const menuBurgerHTML =
-        "<img class='menu-burger' style='margin-top: 12px' width='20px' src='./images/AllAssets/hamburger.png'>";
-      const closeCrossHTML =
-        "<img class='menu-close' style='margin-top: 12px' width='18px' src='./images/AllAssets/Crossclose.png'>";
-
-      // Устанавливаем HTML для меню
       menu.innerHTML = menuBurgerHTML;
-
-      // Добавляем обработчик клика
-      menu.addEventListener("click", function toggleMenu() {
-        if (header.classList.contains("opened")) {
-          header.classList.remove("opened");
-          header.classList.add("closed");
-          verticalMenu.classList.remove("menuIsOpen");
-          verticalMenu.classList.add("menuIsClose");
-          enableScroll();
-          menu.innerHTML = menuBurgerHTML;
-        } else {
-          header.classList.remove("closed");
-          header.classList.add("opened");
-          verticalMenu.classList.add("menuIsOpen");
-          verticalMenu.classList.remove("menuIsClose");
-          disableScroll();
-          menu.innerHTML = closeCrossHTML;
-        }
-      });
       menu.style.marginTop = "0px";
+  
+      // Убедимся, что обработчик клика не добавляется несколько раз
+      if (!menu.dataset.clickHandlerAdded) {
+        menu.addEventListener("click", toggleMenu);
+        menu.dataset.clickHandlerAdded = "true"; // Устанавливаем флаг
+      }
     } else {
-      // Если ширина экрана больше или равна 850px, изменяем стили
       menu.style.marginTop = "5px";
       menu.innerHTML = menuStartHTML;
+  
+      // Удаляем обработчик клика, если он был добавлен
+      if (menu.dataset.clickHandlerAdded) {
+        menu.removeEventListener("click", toggleMenu);
+        delete menu.dataset.clickHandlerAdded; // Удаляем флаг
+      }
     }
   }
-
+  
+  // Функция для переключения меню
+  function toggleMenu() {
+    if (header.classList.contains("closed")) {
+      header.classList.remove("closed");
+      header.classList.add("opened");
+      verticalMenu.classList.add("menuIsOpen");
+      verticalMenu.classList.remove("menuIsClose");
+      disableScroll();
+      menu.innerHTML = closeCrossHTML;
+    } else {
+      header.classList.remove("opened");
+      header.classList.add("closed");
+      verticalMenu.classList.remove("menuIsOpen");
+      verticalMenu.classList.add("menuIsClose");
+      enableScroll();
+      menu.innerHTML = menuBurgerHTML;
+    }
+  }
+  
   // Функции для блокировки и разблокировки прокрутки
   function disableScroll() {
     document.body.style.overflow = "hidden";
   }
-
+  
   function enableScroll() {
     document.body.style.overflow = "";
   }
-
+  
   // Инициализация меню при загрузке страницы
   updateMenu();
-
+  
   // Обработчик события resize для обновления меню при изменении размера окна
   window.addEventListener("resize", updateMenu);
-
+  
   // --------------------------------- Start Portfolio Mobile Animation---------------------------------
   if (window.innerWidth < 900) {
     const items = document.querySelectorAll(".portfolio__item");
@@ -371,3 +388,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 // --------------------------------- END About Numbers Animation---------------------------------
+

@@ -440,6 +440,25 @@ div {
   animation: fadeIn 1s 1s ease-in-out forwards;
 }
 
+#BGVideoInAbout {
+  position: fixed;
+  top: 0;
+  width: 180%;
+  max-width: 900px;
+  /* height: 100%; */
+  object-fit: fit;
+  z-index: -1;
+}
+
+#BGVideoInAbout02 {
+  position: fixed;
+  top: 0;
+  width: 180%;
+  max-width: 900px;
+  /* height: 100%; */
+  object-fit: fit;
+  z-index: -1;
+}
 @media (max-width: 600px) {
   #backgroundVideo {
     height: 900px;
