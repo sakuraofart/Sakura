@@ -2,20 +2,26 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sakura - web studio</title>
 
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="./css/bootstrap-reboot.min.css" />
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </head>
 
 <body>
-    <header>
+    <div class="page-transition-overlay"><div class="maskLogo">sakura.</div></div>
+    <div class="mask"><div class="maskLogo">sakura.</div></div>
+    <header  class="closed">
         <a href="./" class="logo">sakura.</a>
         <div class="menu">
             <ul>
@@ -33,6 +39,11 @@
             <li><a href="contact.html" class="vertical-menu-item">Contact</a></li>
         </ul>
     </header>
+    <div class="contact__image">
+        <video id="BGVideoInContact" autoplay muted loop>
+            <source src="./images/AllAssets/outBGminisak.mp4" type="video/mp4" />
+        </video>
+    </div>
     <section class="main">
         <div class="container">
             <div class="contact">
@@ -51,11 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="contact__image">
-                    <video id="backgroundVideo" muted loop>
-                        <source src="./images/AllAssets/sakuraBloom03.mp4" type="video/mp4" />
-                    </video>
-                </div>
+
             </div>
         </div>
     </section>
