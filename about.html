@@ -64,17 +64,19 @@
           </div>
           <div class="about__image">
             <video id="BGVideoInAbout" autoplay muted loop>
-              <source id="animationSak01"
+              <source
+                id="animationSak01"
                 src="./images/AllAssets/forAbout/longanimSak01.mp4"
                 type="video/mp4"
               />
             </video>
             <video id="BGVideoInAbout02" autoplay muted loop>
-                <source id="animationSak02"
-                  src="./images/AllAssets/forAbout/longanimSak02.mp4"
-                  type="video/mp4"
-                />
-              </video>
+              <source
+                id="animationSak02"
+                src="./images/AllAssets/forAbout/longanimSak02.mp4"
+                type="video/mp4"
+              />
+            </video>
           </div>
         </div>
       </div>
@@ -279,20 +281,27 @@
       <br /><br />
     </section>
 
-
     <script>
-        const videoAnim01 = document.getElementById('BGVideoInAbout');
-        const videoAnim02 =  document.getElementById('BGVideoInAbout02');
-        videoAnim02.style.display = "none"
+      const videoAnim01 = document.getElementById("BGVideoInAbout");
+      videoAnim01.onended  = function() {
+        console.log("edeed")
+      }
 
-              setTimeout(() => {
-                console.log("sosi suka")
-                videoAnim01.style.display = "none"
-                videoAnim02.style.display = "block"
-              }, 20055)
+      function endedFunction(event) {
+        //? parameter in optional
+        console.log("Ended");
+        console.log(event);
+      }
+      const videoAnim02 = document.getElementById("BGVideoInAbout02");
+      videoAnim02.style.display = "none";
+
+      setTimeout(() => {
+        console.log("sosi suka");
+        videoAnim01.style.display = "none";
+        videoAnim02.style.display = "block";
+      }, 20055);
     </script>
 
     <script src="js/script.js"></script>
-
   </body>
 </html>
