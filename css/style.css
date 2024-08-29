@@ -266,8 +266,36 @@ div {
 
 .about__title {
   opacity: 0;
-  animation: fadeIn 3.5s ease-in-out forwards;
+  animation: fadeIn 1.5s ease-in-out forwards;
   font-weight: 300;
+}
+
+.about_why_sakura {
+  display: flex;
+  margin-top: 200px;
+  margin-bottom: 100px;
+  flex-wrap: wrap;
+
+  color: #ffffff;
+  border-radius: 35px;
+  background-color: rgba(31, 31, 31, 0.103);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  border: solid 1px  rgba(255, 255, 255, 0.233);
+  overflow: hidden;
+}
+.sakuratreeIMG {
+  margin: auto;
+}
+.about_sakura_title {
+  font-weight: 200;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+@media (max-width: 1000px) {
+
 }
 
 .container {
@@ -427,6 +455,15 @@ div {
   z-index: -1;
 }
 
+#BGVideoInContact {
+  position: fixed;
+  width: 100%;
+  z-index: -1;
+  top: 0;
+  /* animation: fadeIn 1s ease-in-out forwards;
+  opacity: 0; */
+}
+
 #StaticBackgroundVideo {
   position: fixed;
   top: 0;
@@ -578,6 +615,7 @@ div {
   -webkit-backdrop-filter: blur(35px);
   border-radius: 35px;
   border: solid 1px #ffffff2d;
+
 }
 
 .accordingBlock_title {
@@ -678,6 +716,20 @@ div {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 35px;
 } */
+
+.contact__block {
+  /* background-image: url("../images/AllAssets/sakuraBGimg.png"); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 20px;
+  border-radius: 35px;
+  border: solid 1px  #ffffff27;
+  
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+}
 
 .contact__title {
   font-size: 74px;
