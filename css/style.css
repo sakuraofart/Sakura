@@ -1363,3 +1363,36 @@ hr {
   height: 574px;
 }
 /* ---------------------------------END: portfolio block------------------------------------------ */
+/* ---------------------------------START: jma block------------------------------------------ */
+.jma{
+  padding: 50px;
+}
+.jma__title{
+  text-align: center;
+  font-size: 61px;
+}
+.jma__subtitle{
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+}
+.jma-image{
+  display: flex;
+  justify-content: center;
+  margin: 70px auto;
+}
+.jma-image img{
+  width: 70%;
+}
+.jma-text__title{
+  font-size: 42px;
+}
+.jma-text__subtitle{
+  margin: 12px 0;
+  font-size: 18px;
+}
+.jma-text__subtitle span{
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+/* ---------------------------------END: jma block------------------------------------------ */
