@@ -3,18 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us - Sakura Web Studio | Leading Web Design & Development</title>
+    <title>
+      About Us - Sakura Web Studio | Leading Web Design & Development
+    </title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Learn more about Sakura Web Studio, a leading web design and development agency based in Mountain View, California. Discover our mission, values, and the expert team behind our innovative digital solutions.">
-    <meta name="keywords" content="about us, Sakura Web Studio, web design agency, web development, Mountain View, California, our team, company values, digital solutions">
-    <meta name="author" content="Sakura Web Studio">
-    <meta name="robots" content="index, follow">
+    <meta
+      name="description"
+      content="Learn more about Sakura Web Studio, a leading web design and development agency based in Mountain View, California. Discover our mission, values, and the expert team behind our innovative digital solutions."
+    />
+    <meta
+      name="keywords"
+      content="about us, Sakura Web Studio, web design agency, web development, Mountain View, California, our team, company values, digital solutions"
+    />
+    <meta name="author" content="Sakura Web Studio" />
+    <meta name="robots" content="index, follow" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="About Us - Sakura Web Studio | Leading Web Design & Development">
-    <meta property="og:description" content="Learn more about Sakura Web Studio, a leading web design and development agency based in Mountain View, California. Discover our mission, values, and the expert team behind our innovative digital solutions.">
-    <meta property="og:type" content="website">
+    <meta
+      property="og:title"
+      content="About Us - Sakura Web Studio | Leading Web Design & Development"
+    />
+    <meta
+      property="og:description"
+      content="Learn more about Sakura Web Studio, a leading web design and development agency based in Mountain View, California. Discover our mission, values, and the expert team behind our innovative digital solutions."
+    />
+    <meta property="og:type" content="website" />
 
     <!-- Favicon -->
     <link rel="icon" href="./favicon.ico" type="image/x-icon" />
@@ -26,14 +40,13 @@
     <link rel="stylesheet" href="./css/fonts.css" />
     <link rel="stylesheet" href="./css/style.css" />
 
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-</head>
+  </head>
 
   <body>
     <div class="page-transition-overlay">
@@ -82,14 +95,14 @@
             </div>
           </div>
           <div class="about__image">
-            <video id="BGVideoInAbout" autoplay muted loop>
+            <video id="BGVideoInAbout" autoplay muted preload="auto">
               <source
                 id="animationSak01"
                 src="./images/AllAssets/forAbout/longanimSak01.mp4"
                 type="video/mp4"
               />
             </video>
-            <video id="BGVideoInAbout02" autoplay muted loop>
+            <video id="BGVideoInAbout02" autoplay muted loop preload="auto">
               <source
                 id="animationSak02"
                 src="./images/AllAssets/forAbout/longanimSak02.mp4"
@@ -302,23 +315,15 @@
 
     <script>
       const videoAnim01 = document.getElementById("BGVideoInAbout");
-      videoAnim01.onended  = function() {
-        console.log("edeed")
-      }
-
-      function endedFunction(event) {
-        //? parameter in optional
-        console.log("Ended");
-        console.log(event);
-      }
       const videoAnim02 = document.getElementById("BGVideoInAbout02");
       videoAnim02.style.display = "none";
 
-      setTimeout(() => {
-        console.log("sosi suka");
+      videoAnim01.onended = function () {
+        console.log("edeed");
         videoAnim01.style.display = "none";
         videoAnim02.style.display = "block";
-      }, 20055);
+      };
+
     </script>
 
     <script src="js/script.js"></script>
