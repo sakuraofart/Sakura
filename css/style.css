@@ -899,6 +899,10 @@ hr {
   background-size: cover;
 } */
 
+.item_1{
+  margin-bottom: 15px;
+}
+
 .videoBGportfolio {
   position: absolute;
   /* max-width: 100%; */
@@ -1357,6 +1361,7 @@ hr {
 .content.active {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 .prtf{
   max-width: 60%;
