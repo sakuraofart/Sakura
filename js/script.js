@@ -7,20 +7,16 @@ $(document).ready(function () {
     }
   });
 
-  $(document).on(
-    "click",
-    'a:not([href*="#section"])',
-    function (e) {
-      e.preventDefault();
-      var href = $(this).attr("href");
+  $(document).on("click", 'a:not([href*="#section"])', function (e) {
+    e.preventDefault();
+    var href = $(this).attr("href");
 
-      // Показываем overlay
-      $(".page-transition-overlay").fadeIn(260, function () {
-        // После показа overlay, переходим на новую страницу
-        window.location.href = href;
-      });
-    }
-  );
+    // Показываем overlay
+    $(".page-transition-overlay").fadeIn(260, function () {
+      // После показа overlay, переходим на новую страницу
+      window.location.href = href;
+    });
+  });
 });
 
 let maska = document.querySelector(".mask");
@@ -64,77 +60,50 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /// ANIMATION BACKGROUND VIDEO (main)
   const video = document.getElementById("backgroundVideo");
+  if(video) {
+    
   const targetElement = document.querySelector(".portfolio__block");
-  const mainTitleBlock = document.querySelector(".main-block");
-  let videoPlayed = false;
-  let videoPaused = false;
-  let videoTimeout;
-  let videoEnded = false;
 
-  if (video && targetElement) {
-    function checkVisibility() {
-      const rect = targetElement.getBoundingClientRect();
-      const windowHeight =
-        window.innerHeight || document.documentElement.clientHeight;
+  let videoPlayed = false; // Флаг, чтобы начать проигрывание при прокрутке
+  let videoPausedManually = false; // Флаг для паузы вручную через 3370 мс
 
-      // Проверяем, что элемент виден в пределах окна просмотра
-      return rect.top <= windowHeight && rect.bottom >= 0;
-    }
-
-    function handleScroll() {
-      if (videoEnded) return; // Если видео закончилось, не выполняем никаких действий
-
-      if (!videoPlayed) {
-        video.play();
-        videoPlayed = true;
-
-        // Останавливаем видео через 2 секунды
-        videoTimeout = setTimeout(() => {
-          video.pause();
-          videoPaused = true;
-          mainTitleBlock.classList.add("main-block-fadeIn");
-        }, 3370);
-      }
-
-      // Если видео приостановлено, возобновляем воспроизведение, когда элемент снова видим
-      if (videoPaused && checkVisibility()) {
-        video.play();
-        videoPaused = false;
-      }
-    }
-
-    // Обрабатываем случай, если видео уже было проиграно и страница загружена
-    function handleLoad() {
-      if (checkVisibility()) {
-        handleScroll();
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("load", handleLoad);
-
-    // Обрабатываем случай окончания видео
-    video.addEventListener("ended", () => {
-      videoPaused = true;
-      videoEnded = true;
-    });
-
-    video.addEventListener("loadedmetadata", () => {
-      const videoLengthToStop = video.duration - 1.014;
-      // console.log(videoLengthToStop);
-
-      // Проверяем текущее время воспроизведения видео
-      video.addEventListener("timeupdate", () => {
-        if (video.currentTime >= 13 && !videoEnded) {
-          video.pause();
-        }
-      });
-    });
+  // Проверяем видимость целевого элемента на экране
+  function checkVisibility() {
+    const rect = targetElement.getBoundingClientRect();
+    const windowHeight =
+      window.innerHeight || document.documentElement.clientHeight;
+    return rect.top <= windowHeight && rect.bottom >= 0;
   }
 
-  /// ANIMATION BACKGROUND VIDEO (about)
+  // Обработчик для прокрутки страницы
+  function handleScroll() {
+    // Если видео не было проиграно, запускаем его
+    if (!videoPlayed) {
+      video.play();
+      videoPlayed = true;
 
+      // Останавливаем видео через 3.37 секунд
+      setTimeout(() => {
+        video.pause();
+        videoPausedManually = true;
+      }, 3370);
+    }
 
+    // Если целевой элемент виден и видео было приостановлено, продолжаем воспроизведение
+    if (videoPausedManually && checkVisibility()) {
+      video.play();
+      videoPausedManually = false;
+    }
+  }
+
+  // Останавливаем видео на паузу, когда оно заканчивается
+  video.addEventListener("ended", () => {
+    video.pause();
+  });
+
+  // Добавляем обработчики событий для прокрутки
+  window.addEventListener("scroll", handleScroll);
+  }
   // ---------------------------------------------------------------------------------------------
 
   // --------------------------------------ShortInfoBlock Script-------------------------------------
@@ -178,27 +147,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-
-
-
-
   const menu = document.querySelector(".menu");
   const verticalMenu = document.querySelector(".vertical-menu");
   const menuStartHTML = menu.innerHTML;
   const header = document.querySelector("header");
-  
+
   const menuBurgerHTML =
     "<img class='menu-burger' style='margin-top: 12px' width='20px' src='./images/AllAssets/hamburger.png'>";
   const closeCrossHTML =
     "<img class='menu-close' style='margin-top: 12px' width='18px' src='./images/AllAssets/Crossclose.png'>";
-  
+
   // Функция для обновления меню в зависимости от ширины экрана
   function updateMenu() {
     // Проверка текущей ширины экрана
     if (window.innerWidth < 950) {
       menu.innerHTML = menuBurgerHTML;
       menu.style.marginTop = "0px";
-  
+
       // Убедимся, что обработчик клика не добавляется несколько раз
       if (!menu.dataset.clickHandlerAdded) {
         menu.addEventListener("click", toggleMenu);
@@ -207,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       menu.style.marginTop = "5px";
       menu.innerHTML = menuStartHTML;
-  
+
       // Удаляем обработчик клика, если он был добавлен
       if (menu.dataset.clickHandlerAdded) {
         menu.removeEventListener("click", toggleMenu);
@@ -215,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   }
-  
+
   // Функция для переключения меню
   function toggleMenu() {
     if (header.classList.contains("closed")) {
@@ -234,22 +199,22 @@ document.addEventListener("DOMContentLoaded", function () {
       menu.innerHTML = menuBurgerHTML;
     }
   }
-  
+
   // Функции для блокировки и разблокировки прокрутки
   function disableScroll() {
     document.body.style.overflow = "hidden";
   }
-  
+
   function enableScroll() {
     document.body.style.overflow = "";
   }
-  
+
   // Инициализация меню при загрузке страницы
   updateMenu();
-  
+
   // Обработчик события resize для обновления меню при изменении размера окна
   window.addEventListener("resize", updateMenu);
-  
+
   // --------------------------------- Start Portfolio Mobile Animation---------------------------------
   if (window.innerWidth < 900) {
     const items = document.querySelectorAll(".portfolio__item");
@@ -389,21 +354,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 // --------------------------------- END About Numbers Animation---------------------------------
 // --------------------------------- END popup---------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-  const tabs = document.querySelectorAll('.tab');
-  const contents = document.querySelectorAll('.content');
+document.addEventListener("DOMContentLoaded", () => {
+  const tabs = document.querySelectorAll(".tab");
+  const contents = document.querySelectorAll(".content");
 
-  tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-          // Remove active class from all tabs and contents
-          tabs.forEach(t => t.classList.remove('active'));
-          contents.forEach(c => c.classList.remove('active'));
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      // Remove active class from all tabs and contents
+      tabs.forEach((t) => t.classList.remove("active"));
+      contents.forEach((c) => c.classList.remove("active"));
 
-          // Add active class to the clicked tab and corresponding content
-          tab.classList.add('active');
-          const target = tab.getAttribute('data-tab');
-          document.getElementById(target).classList.add('active');
-      });
+      // Add active class to the clicked tab and corresponding content
+      tab.classList.add("active");
+      const target = tab.getAttribute("data-tab");
+      document.getElementById(target).classList.add("active");
+    });
   });
 });
 
