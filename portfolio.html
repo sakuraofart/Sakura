@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sakura - web studio</title>
 
     <link rel="icon" href="./favicon.ico" type="image/x-icon" />
@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="./css/fonts.css" />
     <link rel="stylesheet" href="./css/style.css" />
 
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -41,7 +41,9 @@
         </div>
 
         <ul class="vertical-menu">
-            <li><a href="portfolio.html" class="vertical-menu-item">Portfolio</a></li>
+            <li>
+                <a href="portfolio.html" class="vertical-menu-item">Portfolio</a>
+            </li>
             <li><a href="services.html" class="vertical-menu-item">Services</a></li>
             <li><a href="about.html" class="vertical-menu-item">About</a></li>
             <li><a href="contact.html" class="vertical-menu-item">Contact</a></li>
@@ -49,8 +51,10 @@
     </header>
     <section class="main" id="portfolio">
         <div class="container">
-            <h1 class="portfolio__title">We take products and brands <br>
-                to the next level</h1>
+            <h1 class="portfolio__title">
+                We take products and brands <br />
+                to the next level
+            </h1>
             <div class="portfolio__pop">
                 <div class="portfolio-menu">
                     <ul class="tabs">
@@ -61,38 +65,67 @@
                         <li class="tab" data-tab="branding">Branding</li>
                     </ul>
                 </div>
-
-                <div class="portfolio-content">
-                    <div class="content active" id="all">
-                        <a href="portfolio-pages/jessicamillearchitecte.html" class="portfolio__item item_5 prtf">
+                <div class="content active" id="all">
+                    <div class="onPortfolio__content">
+                        <a href="portfolio-pages/jessicamillearchitecte.html" class="onPortfolio portfolio__item">
                             <video class="videoBGportfolio needBig" autoplay loop muted>
-                                <source src="./images/outJessicaMvideo.mp4"></video>
-                            <img style="max-width: 150px;" class="portfolio_item_img"
+                                <source src="./images/outJessicaMvideo.mp4" />
+                            </video>
+                            <img style="max-width: 150px" class="portfolio_item_img"
                                 src="./images/portfolioLOGOS/JessicoLOGO.png" alt="" />
                         </a>
-                        <span>
-                            <a href="portfolio-pages/dala.html" class="portfolio__item item_1">
-                                <video class="videoBGportfolio needBig" autoplay loop muted>
-                                    <source src="./images/outDALA.mp4"></video>
-                                <img style="max-width: 130px;" class="portfolio_item_img"
-                                    src="./images/portfolioLOGOS/dala-d.png" alt="" />
-                            </a>
-                            <a href="portfolio-pages/contra.html" class="portfolio__item item_2">
-                                <video class="videoBGportfolio" autoplay loop muted>
-                                    <source src="./images/outContra.mp4"></video>
-                                <img class="portfolio_item_img" src="./images/portfolioLOGOS/contraLogo.png" alt="" />
-                            </a>
-                        </span>
+                        <a href="portfolio-pages/dala.html" class="onPortfolio portfolio__item">
+                            <video class="videoBGportfolio needBig" autoplay loop muted>
+                                <source src="./images/outDALA.mp4" />
+                            </video>
+                            <img style="max-width: 130px" class="portfolio_item_img"
+                                src="./images/portfolioLOGOS/dala-d.png" alt="" />
+                        </a>
+                        <a href="portfolio-pages/contra.html" class="onPortfolio portfolio__item">
+                            <video class="videoBGportfolio" autoplay loop muted>
+                                <source src="./images/outContra.mp4" />
+                            </video>
+                            <img class="portfolio_item_img" src="./images/portfolioLOGOS/contraLogo.png" alt="" />
+                        </a>
+                        <a href="https://peptone.io/" class="onPortfolio portfolio__item">
+                            <video class="videoBGportfolio needBig" autoplay loop muted>
+                                <source src="./images/peptoneOUT.mp4"></video>
+                            <img  class="portfolio_item_img"
+                                src="./images/portfolioLOGOS/Peptone_logo.png" alt="" />
+                        </a>
+                        <div href="portfolio-pages/contra.html" class="onPortfolio  portfolio__banners">
+                            <img src="./images/portfolio-images/melon01.jpg" alt="">
+                        </div>
+                        <div href="portfolio-pages/contra.html" class="onPortfolio  portfolio__banners">
+                            <img src="./images/portfolio-images/coffe01.png" alt="">
+                        </div>
+                        <div href="portfolio-pages/contra.html" class="onPortfolio  portfolio__banners">
+                            <img src="./images/portfolio-images/tin01.jpg" alt="">
+                        </div>
+                        <div href="portfolio-pages/contra.html" class="onPortfolio  portfolio__banners">
+                            <img src="./images/portfolio-images/duchi01.jpg" alt="">
+                        </div>
+                        <div href="portfolio-pages/contra.html" class="onPortfolio  portfolio__banners">
+                            <img src="./images/portfolio-images/duchi02.jpg" alt="">
+                        </div>
                     </div>
-                    <div class="content" id="featured">Content for Featured</div>
-                    <div class="content" id="digital">Content for Digital Products</div>
-                    <div class="content" id="websites">Content for Websites</div>
-                    <div class="content" id="branding">Content for Branding</div>
                 </div>
-            </div>
-        </div>
-    </section>
 
+                <div class="content" id="featured">
+                    <h2>Content for Featured</h2>
+                </div>
+                <div class="content" id="digital">
+                    <h2>Content for Digital Products</h2>
+                </div>
+                <div class="content" id="websites">
+                    <h2>Content for Websites</h2>
+                </div>
+                <div class="content" id="branding">
+                    <h2>Content for Branding</h2>
+                </div>
+
+            </div>
+    </section>
 
     <script src="js/script.js"></script>
 </body>

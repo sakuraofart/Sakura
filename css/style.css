@@ -833,7 +833,7 @@ hr {
   }
 }
 
-.portfolio__item {
+.portfolio__item, .portfolio__banners {
   background-color: #3d3d3d7c;
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
@@ -1284,7 +1284,7 @@ hr {
 
 .portfolio__title{
   text-align: center;
-  font-size: 52px;
+  font-size: 42px;
   margin-bottom: 35px;
 }
 .portfolio-menu {
@@ -1293,6 +1293,7 @@ hr {
 
 .tabs {
   list-style-type: none;
+  flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
   padding: 0;
   display: flex;
   justify-content: center;
@@ -1310,7 +1311,7 @@ hr {
   background-color: #2424247c;
   backdrop-filter: blur(30px);
   border-radius: 22px;
-  margin-right: 20px;
+  margin: 10px;
   line-height: 17px;
 
   display: inline-block;
@@ -1359,13 +1360,33 @@ hr {
 }
 
 .content.active {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  display: block;
+  width: 100%;
 }
-.prtf{
+/* .prtf{
   max-width: 60%;
-  height: 574px;
+  height: 608.72px;
+} */
+.onPortfolio__content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  
+}
+
+.onPortfolio {
+  margin: 10px;
+  min-width: 300px;
+}
+.portfolio__banners {
+  padding: 0;
+  height: 90%;
+} 
+
+.portfolio__banners img {
+  max-width: 450px;
+  border-radius: 35px;
 }
 /* ---------------------------------END: portfolio block------------------------------------------ */
 /* ---------------------------------START: jma block------------------------------------------ */
