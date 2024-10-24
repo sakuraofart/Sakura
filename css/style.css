@@ -1371,11 +1371,10 @@ hr {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  flex-direction: row;
-  
 }
 
 .onPortfolio {
+  flex: 1;
   margin: 10px;
   min-width: 300px;
 }
@@ -1385,7 +1384,7 @@ hr {
 } 
 
 .portfolio__banners img {
-  max-width: 450px;
+  max-width: 100%;
   border-radius: 35px;
 }
 /* ---------------------------------END: portfolio block------------------------------------------ */
