@@ -523,7 +523,7 @@ div {
   animation: fadeIn 2s 3.3s ease-in-out forwards;
 }
 .scrollArrowCont.onServices {
-  margin-top: 70px;
+  margin-top: 55px;
   animation: fadeIn 0.77s 1s ease-in-out forwards;
 
 }
@@ -1351,7 +1351,6 @@ hr {
 }
 .services__item{
   height: 100vh;
-
 }
 /* 
 .services__item.section {
@@ -1405,7 +1404,15 @@ hr {
   }
   .services__item__title{
     font-size: 40px;
-    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 5px;
+  }
+  .services__item__subtitle{
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+  .services__item__services{
+    font-size: 18px;
   }
 }
 
