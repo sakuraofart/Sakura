@@ -151,11 +151,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const verticalMenu = document.querySelector(".vertical-menu");
   const menuStartHTML = menu.innerHTML;
   const header = document.querySelector("header");
-
-  const menuBurgerHTML =
-    "<img class='menu-burger' style='margin-top: 12px' width='20px' src='/images/AllAssets/hamburger.png'>";
-  const closeCrossHTML =
-    "<img class='menu-close' style='margin-top: 12px' width='18px' src='/images/AllAssets/Crossclose.png'>";
+  
+  let menuBurgerHTML;
+  let closeCrossHTML;
+  
+  if (document.location.pathname.includes("portfolio-pages")) {
+      menuBurgerHTML =
+          "<img class='menu-burger' style='margin-top: 12px' width='20px' src='../images/AllAssets/hamburger.png'>";
+      closeCrossHTML =
+          "<img class='menu-close' style='margin-top: 12px' width='18px' src='../images/AllAssets/Crossclose.png'>";
+  } else {
+      menuBurgerHTML =
+          "<img class='menu-burger' style='margin-top: 12px' width='20px' src='./images/AllAssets/hamburger.png'>";
+      closeCrossHTML =
+          "<img class='menu-close' style='margin-top: 12px' width='18px' src='./images/AllAssets/Crossclose.png'>";
+  }
 
   // Функция для обновления меню в зависимости от ширины экрана
   function updateMenu() {
