@@ -59,50 +59,73 @@ document.addEventListener("DOMContentLoaded", function () {
   new Writer(root);
 
   /// ANIMATION BACKGROUND VIDEO (main)
-  const video = document.getElementById("backgroundVideo");
-  if(video) {
-    
-  const targetElement = document.querySelector(".portfolio__block");
 
-  let videoPlayed = false; // Флаг, чтобы начать проигрывание при прокрутке
-  let videoPausedManually = false; // Флаг для паузы вручную через 3370 мс
+  const videos = document.querySelectorAll(".videoBGportfolio");
 
-  // Проверяем видимость целевого элемента на экране
-  function checkVisibility() {
-    const rect = targetElement.getBoundingClientRect();
-    const windowHeight =
-      window.innerHeight || document.documentElement.clientHeight;
-    return rect.top <= windowHeight && rect.bottom >= 0;
-  }
+  const loadVideo = (video) => {
+    const source = document.createElement("source");
+    source.src = video.getAttribute("data-src");
+    video.appendChild(source);
+    video.load();
+    video.play();
+  };
 
-  // Обработчик для прокрутки страницы
-  function handleScroll() {
-    // Если видео не было проиграно, запускаем его
-    if (!videoPlayed) {
-      video.play();
-      videoPlayed = true;
-
-      // Останавливаем видео через 3.37 секунд
-      setTimeout(() => {
-        video.pause();
-        videoPausedManually = true;
-      }, 3370);
-    }
-
-    // Если целевой элемент виден и видео было приостановлено, продолжаем воспроизведение
-    if (videoPausedManually && checkVisibility()) {
-      video.play();
-      videoPausedManually = false;
-    }
-  }
-
-  // Останавливаем видео на паузу, когда оно заканчивается
-  video.addEventListener("ended", () => {
-    video.pause();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        loadVideo(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
   });
 
-  // Добавляем обработчики событий для прокрутки
-  window.addEventListener("scroll", handleScroll);
+  videos.forEach((video) => {
+    observer.observe(video);
+  });
+
+  const video = document.getElementById("backgroundVideo");
+  if (video) {
+    const targetElement = document.querySelector(".portfolio__block");
+
+    let videoPlayed = false; // Флаг, чтобы начать проигрывание при прокрутке
+    let videoPausedManually = false; // Флаг для паузы вручную через 3370 мс
+
+    // Проверяем видимость целевого элемента на экране
+    function checkVisibility() {
+      const rect = targetElement.getBoundingClientRect();
+      const windowHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+      return rect.top <= windowHeight && rect.bottom >= 0;
+    }
+
+    // Обработчик для прокрутки страницы
+    function handleScroll() {
+      // Если видео не было проиграно, запускаем его
+      if (!videoPlayed) {
+        video.play();
+        videoPlayed = true;
+
+        // Останавливаем видео через 3.37 секунд
+        setTimeout(() => {
+          video.pause();
+          videoPausedManually = true;
+        }, 3370);
+      }
+
+      // Если целевой элемент виден и видео было приостановлено, продолжаем воспроизведение
+      if (videoPausedManually && checkVisibility()) {
+        video.play();
+        videoPausedManually = false;
+      }
+    }
+
+    // Останавливаем видео на паузу, когда оно заканчивается
+    video.addEventListener("ended", () => {
+      video.pause();
+    });
+
+    // Добавляем обработчики событий для прокрутки
+    window.addEventListener("scroll", handleScroll);
   }
   // ---------------------------------------------------------------------------------------------
 
@@ -151,20 +174,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const verticalMenu = document.querySelector(".vertical-menu");
   const menuStartHTML = menu.innerHTML;
   const header = document.querySelector("header");
-  
+
   let menuBurgerHTML;
   let closeCrossHTML;
-  
+
   if (document.location.pathname.includes("portfolio-pages")) {
-      menuBurgerHTML =
-          "<img class='menu-burger' style='margin-top: 12px' width='20px' src='../images/AllAssets/hamburger.png'>";
-      closeCrossHTML =
-          "<img class='menu-close' style='margin-top: 12px' width='18px' src='../images/AllAssets/Crossclose.png'>";
+    menuBurgerHTML =
+      "<img class='menu-burger' style='margin-top: 12px' width='20px' src='../images/AllAssets/hamburger.png'>";
+    closeCrossHTML =
+      "<img class='menu-close' style='margin-top: 12px' width='18px' src='../images/AllAssets/Crossclose.png'>";
   } else {
-      menuBurgerHTML =
-          "<img class='menu-burger' style='margin-top: 12px' width='20px' src='./images/AllAssets/hamburger.png'>";
-      closeCrossHTML =
-          "<img class='menu-close' style='margin-top: 12px' width='18px' src='./images/AllAssets/Crossclose.png'>";
+    menuBurgerHTML =
+      "<img class='menu-burger' style='margin-top: 12px' width='20px' src='./images/AllAssets/hamburger.png'>";
+    closeCrossHTML =
+      "<img class='menu-close' style='margin-top: 12px' width='18px' src='./images/AllAssets/Crossclose.png'>";
   }
 
   // Функция для обновления меню в зависимости от ширины экрана
