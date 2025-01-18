@@ -121,6 +121,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Останавливаем видео на паузу, когда оно заканчивается
     video.addEventListener("ended", () => {
+      gradient = document.querySelector(".gradientblock");
+      gradient.style.display = "block"
       video.pause();
     });
 
