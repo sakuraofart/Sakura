@@ -405,9 +405,9 @@ header ul {
   text-align: center;
 
 }
-
+/* 
 .main-portfolio__link {
-}
+} */
 
 .viewSerBut:hover {
   transition: .33s;
@@ -1551,7 +1551,7 @@ hr {
 
 .content {
   display: none;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .content.active {
@@ -1584,6 +1584,10 @@ hr {
   padding: 0;
   height: auto;
 } 
+.design_video video {
+  max-width: 1000%;
+  height: 300px;
+}
 }
 .portfolio__banners img {
   max-width: 100%;
@@ -1592,6 +1596,13 @@ hr {
 .portfolio__banners video {
   max-width: 100%;
   border-radius: 35px;
+}
+.design_video video {
+  max-width: 1000%;
+  max-height: 320px;
+}
+.design_video  {
+min-width: 440px;
 }
 /* ---------------------------------END: portfolio block------------------------------------------ */
 /* ---------------------------------START: jma block------------------------------------------ */
