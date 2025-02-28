@@ -1604,6 +1604,157 @@ hr {
 .design_video  {
 min-width: 440px;
 }
+.video-block {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin: 10px;
+  border-radius: 35px;
+  transition: opacity 0.33s ease-in-out, background 0.33s ease-in-out;
+  background: transparent;
+}
+/* Фоновый слой с блюром */
+.video-block .bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0000008f;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  opacity: 0;
+  transition: opacity 0.33s ease-in-out;
+  z-index: 0;
+}
+/* Видео с плавным появлением */
+.video-block video {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 100%;
+  object-fit: cover;
+  opacity: 1;
+  transition: opacity 0.33s ease-in-out;
+  z-index: 1;
+}
+/* На мобильных видео скрыто до запуска */
+@media (max-width: 800px) {
+  .video-block video {
+    opacity: 0;
+  }
+}
+@media (min-width: 800px) {
+  .video-block:hover .overlay .play-btn {
+    opacity: 0;
+  }
+}
+.video-block video.playing {
+  opacity: 1;
+}
+
+/* Оверлей с заставкой и кнопкой play */
+.video-block .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.33s ease-in-out;
+  z-index: 2;
+}
+/* Когда оверлей скрыт – класс hidden */
+.video-block .overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+/* Картинка-заставка */
+.video-block .overlay .poster {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+/* Кнопка play */
+.video-block .overlay .play-btn {
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: none;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 25px;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out, background 0.3s, color 0.3s, opacity 0.5s ease-in-out, height 0.3s, width 0.3s;
+}
+.video-block:hover .overlay .play-btn {
+  background: rgba(131, 131, 131, 0.5);
+  width: 65px;
+  height: 65px;
+}
+.play_icon {
+  margin-top: 1px;
+  margin-left: 4px;
+}
+/* На устройствах с hover (ПК) кнопка play плавно исчезает при наведении */
+
+/* Кнопка закрытия (отображается в модальном окне, мобильная версия) */
+.video-block .close-btn {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.44);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: none;
+  color: white;
+  font-size: 24px;
+  display: none;
+  z-index: 4;
+  border-radius: 50%;
+  transition: transform 0.2s ease-in-out, opacity 0.33s ease-in-out;
+}
+.video-block .close-btn:hover {
+  transform: scale(1.1);
+}
+/* Стили для модального окна для мобильной версии */
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.33s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.video-modal.fade-out {
+  animation: fadeOut 0.33s ease-in-out forwards;
+}
 /* ---------------------------------END: portfolio block------------------------------------------ */
 /* ---------------------------------START: jma block------------------------------------------ */
 .jma{
