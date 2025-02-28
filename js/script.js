@@ -409,83 +409,84 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --------------------------------- END popup---------------------------------
 document.addEventListener('DOMContentLoaded', function() {
-  const videoBlock = document.querySelector('.video-block');
-  const video = videoBlock.querySelector('video');
-  const overlay = videoBlock.querySelector('.overlay');
-  const closeBtn = videoBlock.querySelector('.close-btn');
-  
-  let isDesktop = window.innerWidth >= 769;
-  let leaveTimeout = null; // Таймер задержки
-  
-  // Функция запуска видео (при наведении)
-  function startVideo() {
-    if (leaveTimeout) {
-      clearTimeout(leaveTimeout);
-      leaveTimeout = null;
+  const videoBlocks = document.querySelectorAll('.video-block');
+
+  videoBlocks.forEach(block => {
+    const video = block.querySelector('video');
+    const overlay = block.querySelector('.overlay');
+    const closeBtn = block.querySelector('.close-btn');
+    let leaveTimeout = null;
+
+    function startVideo() {
+      if (leaveTimeout) {
+        clearTimeout(leaveTimeout);
+        leaveTimeout = null;
+      }
+      video.play();
+      video.classList.add('playing');
+      overlay.classList.add('hidden');
     }
-    video.play();
-    video.classList.add('playing');
-    // Скрываем оверлей сразу при наведении
-    overlay.classList.add('hidden');
-  }
-  // Функция остановки видео (после задержки)
-  function stopVideo() {
-    video.pause();
-    video.currentTime = 0;
-    video.classList.remove('playing');
-    // Убираем класс hidden, чтобы оверлей плавно стал видимым
-    overlay.classList.remove('hidden');
-  }
-  // При уходе курсора запускаем плавное появление оверлея, затем останавливаем видео через 500 мс
-  function handleMouseLeave() {
-    // Убираем класс hidden для оверлея, чтобы он начал плавно появляться (opacity переходит к 1 за 0.5 сек)
-    overlay.classList.remove('hidden');
-    leaveTimeout = setTimeout(stopVideo, 500);
-  }
-  
-  // Обработчик для мобильного: открытие модального окна с клоном videoBlock
-  function mobilePlayHandler(e) {
-    if(e.target.closest('.close-btn')) return;
-    e.stopPropagation();
-    const modal = document.createElement('div');
-    modal.classList.add('video-modal');
-    const clone = videoBlock.cloneNode(true);
-    modal.appendChild(clone);
-    document.body.appendChild(modal);
-    const modalVideo = clone.querySelector('video');
-    const modalOverlay = clone.querySelector('.overlay');
-    const modalCloseBtn = clone.querySelector('.close-btn');
-    modalVideo.play();
-    modalVideo.classList.add('playing');
-    modalOverlay.classList.add('hidden');
-    modalCloseBtn.style.display = 'block';
-    modalCloseBtn.addEventListener('click', function(e) {
+
+    function stopVideo() {
+      video.pause();
+      video.currentTime = 0;
+      video.classList.remove('playing');
+      overlay.classList.remove('hidden');
+    }
+
+    function handleMouseLeave() {
+      overlay.classList.remove('hidden');
+      leaveTimeout = setTimeout(stopVideo, 500);
+    }
+
+    function mobilePlayHandler(e) {
+      if(e.target.closest('.close-btn')) return;
       e.stopPropagation();
-      modal.classList.add('fade-out');
-      setTimeout(() => {
-        document.body.removeChild(modal);
-      }, 500);
-    });
-  }
-  
-  function updateBehavior() {
-    if (window.innerWidth >= 769) {
-      // ПК-режим
-      videoBlock.addEventListener('mouseenter', startVideo);
-      videoBlock.addEventListener('mouseleave', handleMouseLeave);
-      overlay.style.display = "flex";
-      videoBlock.removeEventListener('click', mobilePlayHandler);
-      isDesktop = true;
-    } else {
-      // Мобильный режим
-      videoBlock.removeEventListener('mouseenter', startVideo);
-      videoBlock.removeEventListener('mouseleave', handleMouseLeave);
-      overlay.style.display = "flex";
-      videoBlock.addEventListener('click', mobilePlayHandler);
-      isDesktop = false;
+      const modal = document.createElement('div');
+      modal.classList.add('video-modal');
+      const clone = block.cloneNode(true);
+      modal.appendChild(clone);
+      document.body.appendChild(modal);
+      const modalVideo = clone.querySelector('video');
+      const modalOverlay = clone.querySelector('.overlay');
+      const modalCloseBtn = clone.querySelector('.close-btn');
+      modalVideo.play();
+      modalVideo.classList.add('playing');
+      modalOverlay.classList.add('hidden');
+      modalCloseBtn.style.display = 'block';
+      modalCloseBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        modal.classList.add('fade-out');
+        setTimeout(() => {
+          document.body.removeChild(modal);
+        }, 500);
+      });
     }
-  }
-  
-  updateBehavior();
-  window.addEventListener('resize', updateBehavior);
+
+    function updateBehavior() {
+      if (window.innerWidth >= 769) {
+        block.addEventListener('mouseenter', startVideo);
+        block.addEventListener('mouseleave', handleMouseLeave);
+        overlay.style.display = "flex";
+        block.removeEventListener('click', mobilePlayHandler);
+      } else {
+        block.removeEventListener('mouseenter', startVideo);
+        block.removeEventListener('mouseleave', handleMouseLeave);
+        overlay.style.display = "flex";
+        block.addEventListener('click', mobilePlayHandler);
+      }
+    }
+    
+    // Сохраняем функцию обновления поведения на элементе, чтобы можно было вызывать её при ресайзе
+    block.updateBehavior = updateBehavior;
+    updateBehavior();
+  });
+
+  window.addEventListener('resize', function() {
+    document.querySelectorAll('.video-block').forEach(block => {
+      if (block.updateBehavior) {
+        block.updateBehavior();
+      }
+    });
+  });
 });
