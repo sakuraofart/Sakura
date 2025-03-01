@@ -900,6 +900,12 @@ div {
   width: 50%;
 }
 
+@media (max-width: 770px) {
+  .contact__subtitle {
+    width: 95%;
+  }
+}
+
 .contact__mail {
   display: flex;
   flex-direction: row;
@@ -1629,7 +1635,7 @@ min-width: 440px;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #0000008f;
+  background: #0000001e;
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   opacity: 0;
@@ -1702,7 +1708,7 @@ min-width: 440px;
   justify-content: center;
   transition: transform 0.2s ease-in-out, background 0.3s, color 0.3s, opacity 0.5s ease-in-out;
 }
-.video-block:hover .overlay .play-btn {
+.video-block:active .overlay .play-btn {
   background: rgba(131, 131, 131, 0.5);
   transform: scale(1.18);
 }
@@ -1756,7 +1762,9 @@ min-width: 440px;
   width: 100vw;
   height: 100vh;
   z-index: 9999;
-  background: #000;
+  background: #000000;
+  /* backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px); */
   display: flex;
   align-items: center;
   justify-content: center;

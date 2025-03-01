@@ -28,6 +28,33 @@ window.addEventListener("load", () => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  // lazy-load
+  const lazyVideos = [].slice.call(document.querySelectorAll('video[data-src]'));
+
+  if ('IntersectionObserver' in window) {
+    let lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(videoEntry) {
+        if (videoEntry.isIntersecting) {
+          let video = videoEntry.target;
+          video.src = video.dataset.src;
+          video.load();
+          lazyVideoObserver.unobserve(video);
+        }
+      });
+    });
+
+    lazyVideos.forEach(function(video) {
+      lazyVideoObserver.observe(video);
+    });
+  } else {
+    // Если IntersectionObserver не поддерживается, загружаем все видео сразу
+    lazyVideos.forEach(function(video) {
+      video.src = video.dataset.src;
+      video.load();
+    });
+  }
+  // ------------------
   class Writer {
     constructor(node) {
       this.node = node;
@@ -248,8 +275,19 @@ document.addEventListener("DOMContentLoaded", function () {
   updateMenu();
 
   // Обработчик события resize для обновления меню при изменении размера окна
-  window.addEventListener("resize", updateMenu);
+  let prevWidth = window.innerWidth; // Сохраняем начальную ширину окна
 
+  function checkWidthChange() {
+    let currentWidth = window.innerWidth;
+    if (currentWidth !== prevWidth) {
+      updateMenu(); // Обновляем меню только при изменении ширины
+      prevWidth = currentWidth; // Обновляем значение ширины
+    }
+  }
+  
+  // Слушаем событие resize и вызываем `checkWidthChange`
+  window.addEventListener("resize", checkWidthChange);
+  
   // --------------------------------- Start Portfolio Mobile Animation---------------------------------
   if (window.innerWidth < 900) {
     const items = document.querySelectorAll(".portfolio__item");
@@ -422,9 +460,12 @@ document.addEventListener('DOMContentLoaded', function() {
         clearTimeout(leaveTimeout);
         leaveTimeout = null;
       }
-      video.play();
+      setTimeout(() => {
+              video.play();
       video.classList.add('playing');
       overlay.classList.add('hidden');
+      }, 10)
+
     }
 
     function stopVideo() {
@@ -436,7 +477,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleMouseLeave() {
       overlay.classList.remove('hidden');
-      leaveTimeout = setTimeout(stopVideo, 500);
+      leaveTimeout = setTimeout(stopVideo, 330);
     }
 
     function mobilePlayHandler(e) {
@@ -459,7 +500,7 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.classList.add('fade-out');
         setTimeout(() => {
           document.body.removeChild(modal);
-        }, 500);
+        }, 330);
       });
     }
 
