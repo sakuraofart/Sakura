@@ -446,88 +446,116 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // --------------------------------- END popup---------------------------------
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const videoBlocks = document.querySelectorAll('.video-block');
 
   videoBlocks.forEach(block => {
-    const video = block.querySelector('video');
-    const overlay = block.querySelector('.overlay');
-    const closeBtn = block.querySelector('.close-btn');
-    let leaveTimeout = null;
+      const video = block.querySelector('video');
+      const overlay = block.querySelector('.overlay');
+      const loader = block.querySelector('.loader'); // Получаем индикатор загрузки
+      const closeBtn = block.querySelector('.close-btn');
 
-    function startVideo() {
-      if (leaveTimeout) {
-        clearTimeout(leaveTimeout);
-        leaveTimeout = null;
+      let leaveTimeout = null;
+
+      function startVideo() {
+          if (leaveTimeout) {
+              clearTimeout(leaveTimeout);
+              leaveTimeout = null;
+          }
+
+          // Показываем индикатор загрузки
+          loader.style.display = 'block';
+
+          // Загружаем видео и убираем лоадер после готовности
+          if (!video.src) {
+              video.src = video.dataset.src; // Загружаем видео
+          }
+          
+          video.load();
+          video.play();
+          video.classList.add('playing');
+          overlay.classList.add('hidden');
+
+          video.oncanplay = () => {
+              loader.style.display = 'none'; // Скрываем загрузчик, когда видео готово
+          };
       }
-      setTimeout(() => {
-              video.play();
-      video.classList.add('playing');
-      overlay.classList.add('hidden');
-      }, 10)
 
-    }
-
-    function stopVideo() {
-      video.pause();
-      video.currentTime = 0;
-      video.classList.remove('playing');
-      overlay.classList.remove('hidden');
-    }
-
-    function handleMouseLeave() {
-      overlay.classList.remove('hidden');
-      leaveTimeout = setTimeout(stopVideo, 330);
-    }
-
-    function mobilePlayHandler(e) {
-      if(e.target.closest('.close-btn')) return;
-      e.stopPropagation();
-      const modal = document.createElement('div');
-      modal.classList.add('video-modal');
-      const clone = block.cloneNode(true);
-      modal.appendChild(clone);
-      document.body.appendChild(modal);
-      const modalVideo = clone.querySelector('video');
-      const modalOverlay = clone.querySelector('.overlay');
-      const modalCloseBtn = clone.querySelector('.close-btn');
-      modalVideo.play();
-      modalVideo.classList.add('playing');
-      modalOverlay.classList.add('hidden');
-      modalCloseBtn.style.display = 'block';
-      modalCloseBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        modal.classList.add('fade-out');
-        setTimeout(() => {
-          document.body.removeChild(modal);
-        }, 330);
-      });
-    }
-
-    function updateBehavior() {
-      if (window.innerWidth >= 769) {
-        block.addEventListener('mouseenter', startVideo);
-        block.addEventListener('mouseleave', handleMouseLeave);
-        overlay.style.display = "flex";
-        block.removeEventListener('click', mobilePlayHandler);
-      } else {
-        block.removeEventListener('mouseenter', startVideo);
-        block.removeEventListener('mouseleave', handleMouseLeave);
-        overlay.style.display = "flex";
-        block.addEventListener('click', mobilePlayHandler);
+      function stopVideo() {
+          video.pause();
+          video.currentTime = 0;
+          video.classList.remove('playing');
+          overlay.classList.remove('hidden');
       }
-    }
-    
-    // Сохраняем функцию обновления поведения на элементе, чтобы можно было вызывать её при ресайзе
-    block.updateBehavior = updateBehavior;
-    updateBehavior();
+
+      function handleMouseLeave() {
+          overlay.classList.remove('hidden');
+          leaveTimeout = setTimeout(stopVideo, 330);
+      }
+
+      function mobilePlayHandler(e) {
+          if (e.target.closest('.close-btn')) return;
+          e.stopPropagation();
+
+          const modal = document.createElement('div');
+          modal.classList.add('video-modal');
+          const clone = block.cloneNode(true);
+          modal.appendChild(clone);
+          document.body.appendChild(modal);
+
+          const modalVideo = clone.querySelector('video');
+          const modalOverlay = clone.querySelector('.overlay');
+          const modalLoader = clone.querySelector('.loader');
+          const modalCloseBtn = clone.querySelector('.close-btn');
+
+          modalLoader.style.display = 'block';
+
+          if (!modalVideo.src) {
+              modalVideo.src = modalVideo.dataset.src;
+          }
+
+          modalVideo.load();
+          modalVideo.play();
+          modalVideo.classList.add('playing');
+          modalOverlay.classList.add('hidden');
+
+          modalVideo.oncanplay = () => {
+              modalLoader.style.display = 'none';
+          };
+
+          modalCloseBtn.style.display = 'block';
+          modalCloseBtn.addEventListener('click', function (e) {
+              e.stopPropagation();
+              modal.classList.add('fade-out');
+              setTimeout(() => {
+                  document.body.removeChild(modal);
+              }, 330);
+          });
+      }
+
+      function updateBehavior() {
+          if (window.innerWidth >= 769) {
+              block.addEventListener('mouseenter', startVideo);
+              block.addEventListener('mouseleave', handleMouseLeave);
+              overlay.style.display = "flex";
+              block.removeEventListener('click', mobilePlayHandler);
+          } else {
+              block.removeEventListener('mouseenter', startVideo);
+              block.removeEventListener('mouseleave', handleMouseLeave);
+              overlay.style.display = "flex";
+              block.addEventListener('click', mobilePlayHandler);
+          }
+      }
+
+      block.updateBehavior = updateBehavior;
+      updateBehavior();
   });
 
-  window.addEventListener('resize', function() {
-    document.querySelectorAll('.video-block').forEach(block => {
-      if (block.updateBehavior) {
-        block.updateBehavior();
-      }
-    });
+  window.addEventListener('resize', function () {
+      document.querySelectorAll('.video-block').forEach(block => {
+          if (block.updateBehavior) {
+              block.updateBehavior();
+          }
+      });
   });
 });
