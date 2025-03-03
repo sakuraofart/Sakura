@@ -637,6 +637,7 @@ div {
 }
 
 #BGVideoInAbout {
+  display: none;
   position: fixed;
   top: 0;
   width: 180%;
@@ -645,6 +646,7 @@ div {
   object-fit: fit;
   z-index: -1;
 }
+
 
 #BGVideoInAbout02 {
   position: fixed;
@@ -1214,9 +1216,11 @@ hr {
 /* ---------------------------------END: portfolio block------------------------------------------ */
 /* ---------------------------------START: about block------------------------------------------ */
 .about__block{
+  opacity: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  animation: fadeIn .32s 1.2s ease-in-out forwards;
 }
 .about__block-nmb{
   font-size: 120px;

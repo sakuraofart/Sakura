@@ -316,7 +316,14 @@
       const videoAnim01 = document.getElementById("BGVideoInAbout");
       const videoAnim02 = document.getElementById("BGVideoInAbout02");
       videoAnim02.style.display = "none";
-
+      window.onload = function() {
+        
+        // Задержка в 2 секунды перед показом видео
+        setTimeout(() => {
+          videoAnim01.style.display = 'block'; // Показываем видео
+          videoAnim01.play(); // Начинаем воспроизведение
+        }, 220); // 2000 миллисекунд = 2 секунды
+    };
       videoAnim01.onended = function () {
         console.log("edeed");
         videoAnim01.style.display = "none";

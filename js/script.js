@@ -28,13 +28,17 @@ window.addEventListener("load", () => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-
   // lazy-load
-  const lazyVideos = [].slice.call(document.querySelectorAll('video[data-src]'));
+  const lazyVideos = [].slice.call(
+    document.querySelectorAll("video[data-src]")
+  );
 
-  if ('IntersectionObserver' in window) {
-    let lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
-      entries.forEach(function(videoEntry) {
+  if ("IntersectionObserver" in window) {
+    let lazyVideoObserver = new IntersectionObserver(function (
+      entries,
+      observer
+    ) {
+      entries.forEach(function (videoEntry) {
         if (videoEntry.isIntersecting) {
           let video = videoEntry.target;
           video.src = video.dataset.src;
@@ -44,12 +48,12 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    lazyVideos.forEach(function(video) {
+    lazyVideos.forEach(function (video) {
       lazyVideoObserver.observe(video);
     });
   } else {
     // Если IntersectionObserver не поддерживается, загружаем все видео сразу
-    lazyVideos.forEach(function(video) {
+    lazyVideos.forEach(function (video) {
       video.src = video.dataset.src;
       video.load();
     });
@@ -149,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Останавливаем видео на паузу, когда оно заканчивается
     video.addEventListener("ended", () => {
       gradient = document.querySelector(".gradientblock");
-      gradient.style.display = "block"
+      gradient.style.display = "block";
       video.pause();
     });
 
@@ -284,10 +288,10 @@ document.addEventListener("DOMContentLoaded", function () {
       prevWidth = currentWidth; // Обновляем значение ширины
     }
   }
-  
+
   // Слушаем событие resize и вызываем `checkWidthChange`
   window.addEventListener("resize", checkWidthChange);
-  
+
   // --------------------------------- Start Portfolio Mobile Animation---------------------------------
   if (window.innerWidth < 900) {
     const items = document.querySelectorAll(".portfolio__item");
@@ -396,34 +400,35 @@ document.addEventListener("DOMContentLoaded", function () {
 // --------------------------------- START About Numbers Animation---------------------------------
 document.addEventListener("DOMContentLoaded", function () {
   const numberElements = document.querySelectorAll(".about__block-nmb");
-
-  numberElements.forEach((el) => {
-    const textContent = el.textContent.trim();
-    // Проверяем, является ли содержимое числом
-    const maxNumber = parseInt(textContent.replace(/\D/g, ""));
-    if (!isNaN(maxNumber)) {
-      animateNumber(el, 0, maxNumber, 2000); // 2000 - длительность анимации в мс
-    }
-  });
-
-  function animateNumber(element, start, end, duration) {
-    let startTime = null;
-
-    function animation(currentTime) {
-      if (startTime === null) startTime = currentTime;
-      const progress = currentTime - startTime;
-      const value = Math.min(
-        Math.floor((progress / duration) * (end - start) + start),
-        end
-      );
-      element.textContent = value + (end === 80 ? "+" : ""); // Добавляем '+' к 80
-      if (progress < duration) {
-        requestAnimationFrame(animation);
+  setTimeout(() => {
+    numberElements.forEach((el) => {
+      const textContent = el.textContent.trim();
+      // Проверяем, является ли содержимое числом
+      const maxNumber = parseInt(textContent.replace(/\D/g, ""));
+      if (!isNaN(maxNumber)) {
+        animateNumber(el, 0, maxNumber, 2000); // 2000 - длительность анимации в мс
       }
-    }
+    });
 
-    requestAnimationFrame(animation);
-  }
+    function animateNumber(element, start, end, duration) {
+      let startTime = null;
+
+      function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const progress = currentTime - startTime;
+        const value = Math.min(
+          Math.floor((progress / duration) * (end - start) + start),
+          end
+        );
+        element.textContent = value + (end === 80 ? "+" : ""); // Добавляем '+' к 80
+        if (progress < duration) {
+          requestAnimationFrame(animation);
+        }
+      }
+
+      requestAnimationFrame(animation);
+    }
+  }, 550);
 });
 // --------------------------------- END About Numbers Animation---------------------------------
 // --------------------------------- END popup---------------------------------
@@ -446,108 +451,107 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // --------------------------------- END popup---------------------------------
-document.addEventListener('DOMContentLoaded', function () {
-  const videoBlocks = document.querySelectorAll('.video-block');
-  if(videoBlocks) {
-  videoBlocks.forEach(block => {
-    const video = block.querySelector('video');
-    const overlay = block.querySelector('.overlay');
-    const loader = block.querySelector('.loader');
-    const closeBtn = block.querySelector('.close-btn');
-    let leaveTimeout = null;
+document.addEventListener("DOMContentLoaded", function () {
+  const videoBlocks = document.querySelectorAll(".video-block");
+  if (videoBlocks) {
+    videoBlocks.forEach((block) => {
+      const video = block.querySelector("video");
+      const overlay = block.querySelector(".overlay");
+      const loader = block.querySelector(".loader");
+      const closeBtn = block.querySelector(".close-btn");
+      let leaveTimeout = null;
 
-    // Функция для ПК: при наведении запускаем видео сразу
-    function startVideo() {
-      if (leaveTimeout) {
-        clearTimeout(leaveTimeout);
-        leaveTimeout = null;
+      // Функция для ПК: при наведении запускаем видео сразу
+      function startVideo() {
+        if (leaveTimeout) {
+          clearTimeout(leaveTimeout);
+          leaveTimeout = null;
+        }
+        video.play();
+        video.classList.add("playing");
+        overlay.classList.add("hidden");
       }
-      video.play();
-      video.classList.add('playing');
-      overlay.classList.add('hidden');
-    }
 
-    // Функция остановки видео – вызывается через задержку после ухода курсора
-    function stopVideo() {
-      video.pause();
-      video.currentTime = 0;
-      video.classList.remove('playing');
-      overlay.classList.remove('hidden');
-    }
-
-    // При уходе курсора с блока (ПК) даем 500 мс на плавное появление overlay,
-    // затем останавливаем видео. Здесь плавность достигается за счёт CSS-перехода.
-    function handleMouseLeave() {
-      overlay.classList.remove('hidden');
-      leaveTimeout = setTimeout(stopVideo, 300);
-    }
-
-    // Обработчик для мобильного: открытие модального окна с клоном блока.
-    // Здесь loader показывается до момента, когда видео готово к воспроизведению.
-    function mobilePlayHandler(e) {
-      if (e.target.closest('.close-btn')) return;
-      e.stopPropagation();
-      const modal = document.createElement('div');
-      modal.classList.add('video-modal');
-      const clone = block.cloneNode(true);
-      modal.appendChild(clone);
-      document.body.appendChild(modal);
-
-      const modalVideo = clone.querySelector('video');
-      const modalOverlay = clone.querySelector('.overlay');
-      const modalLoader = clone.querySelector('.loader');
-      const modalCloseBtn = clone.querySelector('.close-btn');
-
-      modalLoader.style.display = 'block';
-      if (!modalVideo.src) {
-        modalVideo.src = modalVideo.dataset.src;
+      // Функция остановки видео – вызывается через задержку после ухода курсора
+      function stopVideo() {
+        video.pause();
+        video.currentTime = 0;
+        video.classList.remove("playing");
+        overlay.classList.remove("hidden");
       }
-      modalVideo.load();
-      modalVideo.play();
-      modalVideo.classList.add('playing');
-      modalOverlay.classList.add('hidden');
 
-      // Скрываем loader сразу, как только видео готово к воспроизведению,
-      // чтобы не было видимого переключения.
-      modalVideo.oncanplay = () => {
-        modalLoader.style.display = 'none';
-      };
+      // При уходе курсора с блока (ПК) даем 500 мс на плавное появление overlay,
+      // затем останавливаем видео. Здесь плавность достигается за счёт CSS-перехода.
+      function handleMouseLeave() {
+        overlay.classList.remove("hidden");
+        leaveTimeout = setTimeout(stopVideo, 300);
+      }
 
-      modalCloseBtn.style.display = 'block';
-      modalCloseBtn.addEventListener('click', function (e) {
+      // Обработчик для мобильного: открытие модального окна с клоном блока.
+      // Здесь loader показывается до момента, когда видео готово к воспроизведению.
+      function mobilePlayHandler(e) {
+        if (e.target.closest(".close-btn")) return;
         e.stopPropagation();
-        modal.classList.add('fade-out');
-        setTimeout(() => {
-          document.body.removeChild(modal);
-        }, 300);
-      });
-    }
+        const modal = document.createElement("div");
+        modal.classList.add("video-modal");
+        const clone = block.cloneNode(true);
+        modal.appendChild(clone);
+        document.body.appendChild(modal);
 
-    function updateBehavior() {
-      if (window.innerWidth >= 769) {
-        block.addEventListener('mouseenter', startVideo);
-        block.addEventListener('mouseleave', handleMouseLeave);
-        overlay.style.display = "flex";
-        block.removeEventListener('click', mobilePlayHandler);
-      } else {
-        block.removeEventListener('mouseenter', startVideo);
-        block.removeEventListener('mouseleave', handleMouseLeave);
-        overlay.style.display = "flex";
-        block.addEventListener('click', mobilePlayHandler);
-      }
-    }
-    
-    block.updateBehavior = updateBehavior;
-    updateBehavior();
-  });
+        const modalVideo = clone.querySelector("video");
+        const modalOverlay = clone.querySelector(".overlay");
+        const modalLoader = clone.querySelector(".loader");
+        const modalCloseBtn = clone.querySelector(".close-btn");
 
-  window.addEventListener('resize', function () {
-    document.querySelectorAll('.video-block').forEach(block => {
-      if (block.updateBehavior) {
-        block.updateBehavior();
+        modalLoader.style.display = "block";
+        if (!modalVideo.src) {
+          modalVideo.src = modalVideo.dataset.src;
+        }
+        modalVideo.load();
+        modalVideo.play();
+        modalVideo.classList.add("playing");
+        modalOverlay.classList.add("hidden");
+
+        // Скрываем loader сразу, как только видео готово к воспроизведению,
+        // чтобы не было видимого переключения.
+        modalVideo.oncanplay = () => {
+          modalLoader.style.display = "none";
+        };
+
+        modalCloseBtn.style.display = "block";
+        modalCloseBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          modal.classList.add("fade-out");
+          setTimeout(() => {
+            document.body.removeChild(modal);
+          }, 300);
+        });
       }
+
+      function updateBehavior() {
+        if (window.innerWidth >= 769) {
+          block.addEventListener("mouseenter", startVideo);
+          block.addEventListener("mouseleave", handleMouseLeave);
+          overlay.style.display = "flex";
+          block.removeEventListener("click", mobilePlayHandler);
+        } else {
+          block.removeEventListener("mouseenter", startVideo);
+          block.removeEventListener("mouseleave", handleMouseLeave);
+          overlay.style.display = "flex";
+          block.addEventListener("click", mobilePlayHandler);
+        }
+      }
+
+      block.updateBehavior = updateBehavior;
+      updateBehavior();
     });
-  });    
-  }
 
+    window.addEventListener("resize", function () {
+      document.querySelectorAll(".video-block").forEach((block) => {
+        if (block.updateBehavior) {
+          block.updateBehavior();
+        }
+      });
+    });
+  }
 });
