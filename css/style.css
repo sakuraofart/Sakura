@@ -1220,7 +1220,7 @@ hr {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  animation: fadeIn .32s 1.2s ease-in-out forwards;
+  animation: fadeIn .120s  ease-in-out forwards;
 }
 .about__block-nmb{
   font-size: 120px;
