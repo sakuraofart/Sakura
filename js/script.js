@@ -406,7 +406,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Проверяем, является ли содержимое числом
       const maxNumber = parseInt(textContent.replace(/\D/g, ""));
       if (!isNaN(maxNumber)) {
-        animateNumber(el, 0, maxNumber, 2000); // 2000 - длительность анимации в мс
+        animateNumber(el, 0, maxNumber, 2200); // 2000 - длительность анимации в мс
       }
     });
 
