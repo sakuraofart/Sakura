@@ -460,7 +460,6 @@ div {
 
 .main {
   height: 100vh;
-  display: flex;
   justify-content: flex-start;
   align-items: center;
 }
@@ -1578,6 +1577,7 @@ hr {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 
 .onPortfolio {
