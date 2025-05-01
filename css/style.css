@@ -460,6 +460,7 @@ div {
 
 .main {
   height: 100vh;
+  display: flex;
   justify-content: flex-start;
   align-items: center;
 }
@@ -867,25 +868,12 @@ div {
   flex-direction: row;
 }
 
-/* .contact__block {
-  background-color: #1616167c;
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  color: white;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 35px;
-} */
-
 .contact__block {
-  /* background-image: url("../images/AllAssets/sakuraBGimg.png"); */
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 20px;
+  padding: 3px 25px 25px 30px;
   border-radius: 35px;
-  border: solid 1px  #ffffff27;
-  margin-top: 30px;
-  
+  border: solid 1px  #ffffff27;  
   background-color: rgba(0, 0, 0, 0);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
